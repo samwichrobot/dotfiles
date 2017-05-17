@@ -1,0 +1,5 @@
+vim-syntastic/syntastic
+vim-airline/vim-airline
+tpope/vim-dispatch
+digitaltoad/vim-pug
+wavded/vim-stylus
