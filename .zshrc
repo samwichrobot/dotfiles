@@ -1,2 +1,2 @@
 export SOURCE_DIR=$HOME/projects
-eval "$(/home/brandon/dotmatrix/hr/bin/hr init -)"
+eval "$($HOME/dotmatrix/hr/bin/hr init -)"
