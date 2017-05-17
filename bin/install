@@ -4,3 +4,4 @@ ln -s $HOME/dotfiles/.vimrc $HOME/.vimrc.local
 ln -s $HOME/dotfiles/.vimbundle $HOME/.vimbundle.local
 ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc.local
 ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf.local
+ln -s $HOME/dotfiles/.aliases $HOME/.aliases.local
