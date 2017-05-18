@@ -5,9 +5,12 @@ let g:jsx_ext_required = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
-colorscheme tender
+colorscheme gruvbox
 
+" For gvim in linux
 set gfn=Hack\ 14
+
+" For macvim
 set guifont=Hack:h16
 
 set autoread
@@ -32,3 +35,34 @@ set background=dark
 " - or unnecessary.
 set visualbell t_vb=
 au GuiEnter * set visualbell t_vb=
+
+" Setup ctrlp
+let g:ctrlp_map = '<leader>p'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+" Nerdtree shortcut
+map <leader>n :NERDTreeToggle<CR>
+
+" Folding setup
+set foldmethod=indent
+set foldlevel=99
+noremap <leader>f za
+
+" Remove whitespace on save
+let g:spacejam_filetypes = 'ruby,javascript,vim,perl,sass,scss,css,coffee,haml,python,go'
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" SuperTab uses omni if enabled
+let g:SuperTabDefaultCompletionType = "context"
+
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" vim-go setup
+let g:go_fmt_command = "goimports"

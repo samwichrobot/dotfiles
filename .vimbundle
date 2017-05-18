@@ -4,3 +4,8 @@ tpope/vim-dispatch
 digitaltoad/vim-pug
 wavded/vim-stylus
 jacoborus/tender
+morhetz/gruvbox
+othree/yajs.vim
+fatih/vim-go
+scrooloose/nerdtree
+ctrlpvim/ctrlp.vim
