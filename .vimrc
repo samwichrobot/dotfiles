@@ -5,14 +5,10 @@ let g:jsx_ext_required = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
-
-colorscheme BusyBee
+colorscheme tender
 
 set gfn=Hack\ 14
+set guifont=Hack:h16
 
 set autoread
 set noundofile
