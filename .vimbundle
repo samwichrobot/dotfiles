@@ -9,3 +9,4 @@ othree/yajs.vim
 fatih/vim-go
 scrooloose/nerdtree
 ctrlpvim/ctrlp.vim
+jiangmiao/auto-pairs
