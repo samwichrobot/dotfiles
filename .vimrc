@@ -42,7 +42,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 " Nerdtree shortcut
-map <leader>n :NERDTreeToggle<CR>
+map <leader>l :NERDTreeToggle<CR>
 
 " Folding setup
 set foldmethod=indent
@@ -66,3 +66,12 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " vim-go setup
 let g:go_fmt_command = "goimports"
+
+" tasks setup
+
+let g:TasksMarkerBase = '☐'
+let g:TasksMarkerDone = '✔'
+let g:TasksMarkerCancelled = '✘'
+let g:TasksDateFormat = '%Y-%m-%d %H:%M'
+let g:TasksAttributeMarker = '@'
+let g:TasksArchiveSeparator = '-------------------------------'
