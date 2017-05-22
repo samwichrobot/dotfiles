@@ -1,5 +1,5 @@
 alias git=hub
 alias vim=nvim
 alias pcd=hcd
-alias start-tmate="tmate -S /tmp/tmate.sock new-session && copy-tmate"
 alias copy-tmate="tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}' | pbcopy"
+alias start-tmate="tmate -S /tmp/tmate.sock new-session"
