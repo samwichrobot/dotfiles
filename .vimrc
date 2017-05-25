@@ -1,6 +1,8 @@
 let mapleader = "\<Space>"
 let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
 let g:jsx_ext_required = 0
+set completeopt=menu,preview,longest
 
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -8,10 +10,10 @@ let g:airline_right_sep=''
 colorscheme gruvbox
 
 " For gvim in linux
-set gfn=Hack\ 14
+set gfn=Hack\ 18
 
 " For macvim
-set guifont=Hack:h16
+set guifont=Hack:h18
 
 set autoread
 set noundofile
@@ -75,3 +77,10 @@ let g:TasksMarkerCancelled = '✘'
 let g:TasksDateFormat = '%Y-%m-%d %H:%M'
 let g:TasksAttributeMarker = '@'
 let g:TasksArchiveSeparator = '-------------------------------'
+
+" vim-node setup
+autocmd User Node
+  \ if &filetype == "javascript" |
+  \   nmap <buffer> <C-w>f <Plug>NodeVSplitGotoFile |
+  \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
+  \ endif
