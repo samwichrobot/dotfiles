@@ -10,3 +10,5 @@ export PATH=$PATH:$GOPATH/bin
 
 # Add node modules bin to path
 export PATH=$PATH:node_modules/.bin
+# RVM setup
+export PATH="$PATH:$HOME/.rvm/bin"

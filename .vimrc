@@ -76,6 +76,7 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " vim-go setup
 let g:go_fmt_command = "goimports"
+let g:go_autodetect_gopath = 1
 
 " tasks setup
 
@@ -93,4 +94,4 @@ autocmd User Node
   \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
   \ endif
 
-set relativenumber
+set number
