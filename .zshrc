@@ -8,3 +8,6 @@ source $HOME/.aliases.local
 export PATH=$PATH:node_modules/.bin
 # RVM setup
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# added by Anaconda3 4.4.0 installer
+export PATH="/Users/brandon/anaconda/bin:$PATH"
