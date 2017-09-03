@@ -6,6 +6,7 @@ source $HOME/.aliases.local
 
 # Add node modules bin to path
 export PATH=$PATH:node_modules/.bin
+
 # RVM setup
 export PATH="$PATH:$HOME/.rvm/bin"
 
@@ -14,3 +15,7 @@ export PATH="/Users/brandon/anaconda/bin:$PATH"
 
 # add home bin directory
 export PATH="$PATH:$HOME/bin"
+
+# Setup for go
+export GOPATH=$HOME/gopath
+export PATH=$PATH:$GOPATH/bin
