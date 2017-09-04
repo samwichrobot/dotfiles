@@ -95,3 +95,6 @@ autocmd User Node
   \ endif
 
 set number
+
+" link vim notes to Dropbox
+let g:notes_directories = ['~/Dropbox/Notes']
