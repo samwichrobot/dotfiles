@@ -11,7 +11,7 @@ export PATH=$PATH:node_modules/.bin
 export PATH="$PATH:$HOME/.rvm/bin"
 
 # added by Anaconda3 4.4.0 installer
-export PATH="/Users/brandon/anaconda/bin:$PATH"
+export PATH="$HOME/anaconda/bin:$PATH"
 
 # add home bin directory
 export PATH="$PATH:$HOME/bin"
