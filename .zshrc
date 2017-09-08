@@ -19,3 +19,9 @@ export PATH="$PATH:$HOME/bin"
 # Setup for go
 export GOPATH=$HOME/gopath
 export PATH=$PATH:$GOPATH/bin
+
+# Linux stuff
+if [ "$(expr substr $(uname -s) 1 5)" == "Linux"  ]; then
+  alias pbcopy='xclip -selection clipboard'
+  alias pbpaste='xclip -selection clipboard -o'
+fi
