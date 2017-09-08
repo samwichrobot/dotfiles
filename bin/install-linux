@@ -1,1 +1,5 @@
-sudo apt install xclip
+#!/bin/sh
+
+sudo apt install -y xclip
+sudo apt install -y build-sesential
+sudo apt install -y calibre
