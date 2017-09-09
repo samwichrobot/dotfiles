@@ -1,0 +1,7 @@
+#!/bin/sh
+
+SCRIPT="Anaconda3-4.4.0-Linux-x86_64.sh"
+
+curl -O https://repo.continuum.io/archive/$SCRIPT
+bash $SCRIPT
+rm $SCRIPT
