@@ -1,8 +1,5 @@
-export SOURCE_DIR=$HOME/projects
-eval "$($HOME/dotmatrix/hr/bin/hr init -)"
-
 # Load custom aliases
-source $HOME/.aliases.local
+source $HOME/.aliases
 
 # Add node modules bin to path
 export PATH=$PATH:node_modules/.bin
@@ -16,8 +13,13 @@ export PATH="$HOME/anaconda/bin:$PATH"
 # add home bin directory
 export PATH="$PATH:$HOME/bin"
 
-# Linux stuff
-if [ "$(expr substr $(uname -s) 1 5)" == "Linux"  ]; then
-  alias pbcopy='xclip -selection clipboard'
-  alias pbpaste='xclip -selection clipboard -o'
-fi
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
+export ZSH=/home/curiosity/.oh-my-zsh
+plugins=(git bundler osx rake ruby node npm nyan tmux)
+ZSH_THEME="ys"
+
+export EDITOR=vim
+
+source $HOME/.oh-my-zsh/oh-my-zsh.sh
