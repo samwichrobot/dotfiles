@@ -23,3 +23,5 @@ ZSH_THEME="ys"
 export EDITOR=vim
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
+
+export TERM=xterm-256color
