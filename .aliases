@@ -1,5 +1,5 @@
 alias git=hub
-alias pcd=hcd
 alias copy-tmate="tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}' | pbcopy"
 alias start-tmate="tmate -S /tmp/tmate.sock new-session"
 alias attach-tmate="tmate -S /tmp/tmate.sock attach"
+alias eotl="telnet eotl.org 2010"
