@@ -7,7 +7,6 @@ Plug 'wavded/vim-stylus'
 Plug 'jacoborus/tender'
 Plug 'morhetz/gruvbox'
 Plug 'othree/yajs.vim'
-Plug 'fatih/vim-go'
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -18,7 +17,6 @@ Plug 'mtth/scratch.vim'
 Plug 'moll/vim-node'
 Plug 'hashrocket/vim-hashrocket'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'adamlowe/vim-slurper'
 Plug 'jbranchaud/vim-bdubs'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
@@ -26,16 +24,13 @@ Plug 'gregsexton/gitv'
 Plug 'heartsentwined/vim-emblem'
 Plug 'jgdavey/tslime.vim'
 Plug 'jgdavey/vim-blockle'
-Plug 'jgdavey/vim-railscasts'
 Plug 'jgdavey/vim-turbux'
 Plug 'jgdavey/vim-weefactor'
-Plug 'kchmck/vim-coffee-script'
 Plug 'leshill/vim-json'
 Plug 'mileszs/ack.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'rondale-sc/vim-spacejam'
 Plug 'slim-template/vim-slim'
-Plug 'therubymug/vim-pyte'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
@@ -46,7 +41,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-pathogen'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-rails'
@@ -59,7 +53,6 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-vividchalk'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'vim-scripts/bufkill.vim'
@@ -74,7 +67,6 @@ call plug#end()
 
 let mapleader = "\<Space>"
 let g:syntastic_javascript_checkers = ['standard']
-let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
 let g:jsx_ext_required = 0
 set completeopt=menu,preview,longest
 
@@ -82,6 +74,16 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 
 colorscheme gruvbox
+
+if &term =~ '256color'
+  " Disable Background Color Erase (BCE) so that color schemes
+  " work properly when Vim is used inside tmux and GNU screen.
+  set t_ut=
+endif
+
+set guioptions=a
+set number
+set ma
 
 " For gvim in linux
 set gfn=Hack\ 18
@@ -134,7 +136,7 @@ set foldlevel=99
 noremap <leader>f za
 
 " Remove whitespace on save
-let g:spacejam_filetypes = 'ruby,javascript,vim,perl,sass,scss,css,coffee,haml,python,go'
+let g:spacejam_filetypes = 'ruby,javascript,vim,perl,sass,scss,css,coffee,haml,python'
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -142,15 +144,8 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" SuperTab uses omni if enabled
-let g:SuperTabDefaultCompletionType = "context"
-
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-
-" vim-go setup
-let g:go_fmt_command = "goimports"
-let g:go_autodetect_gopath = 1
 
 " tasks setup
 
@@ -168,13 +163,6 @@ autocmd User Node
   \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
   \ endif
 
-set number
 
 " link vim notes to Dropbox
 let g:notes_directories = ['~/Dropbox/Notes']
-
-if &term =~ '256color'
-  " Disable Background Color Erase (BCE) so that color schemes
-  " work properly when Vim is used inside tmux and GNU screen.
-  set t_ut=
-endif

@@ -9,6 +9,7 @@ sudo apt install -y xclip
 sudo apt install -y build-sesential
 sudo apt install -y calibre
 sudo apt install -y vim
+sudo apt install -y vim-gtk
 sudo apt install -y zsh
 sudo apt install -y tmux
 sudo apt install -y irssi
