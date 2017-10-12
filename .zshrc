@@ -9,7 +9,7 @@ alias pbpaste='xclip -selection clipboard -o'
 plugins=(git node npm nyan tmux)
 ZSH_THEME="ys"
 
-export ZSH=/home/curiosity/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 export EDITOR=vim
 export TERM=xterm-256color
 

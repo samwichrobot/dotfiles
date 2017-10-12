@@ -63,6 +63,7 @@ Plug 'exu/pgsql.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'mxw/vim-jsx'
 Plug 'sbdchd/neoformat'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 let mapleader = "\<Space>"
@@ -89,7 +90,7 @@ set ma
 set gfn=Hack\ 18
 
 " For macvim
-set guifont=Hack:h18
+set guifont=Monaco:h18
 
 set autoread
 set noundofile
