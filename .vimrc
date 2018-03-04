@@ -53,17 +53,16 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
-Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'vim-scripts/bufkill.vim'
 Plug 'wgibbs/vim-irblack'
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'exu/pgsql.vim'
-Plug 'elixir-lang/vim-elixir'
 Plug 'mxw/vim-jsx'
 Plug 'sbdchd/neoformat'
 Plug 'airblade/vim-gitgutter'
+Plug 'fatih/vim-go'
 call plug#end()
 
 let mapleader = "\<Space>"
@@ -71,8 +70,7 @@ let g:syntastic_javascript_checkers = ['standard']
 let g:jsx_ext_required = 0
 set completeopt=menu,preview,longest
 
-let g:airline_left_sep=''
-let g:airline_right_sep=''
+let g:airline#extensions#tabline#enabled = 1
 
 colorscheme gruvbox
 
@@ -131,6 +129,11 @@ endif
 " Nerdtree shortcut
 map <leader>l :NERDTreeToggle<CR>
 
+" Go shortcuts
+autocmd FileType go map <leader>r :GoRename<CR>
+autocmd FileType go map <leader>g :GoBuild<CR>
+autocmd FileType go map <leader>h :GoDoc<CR>
+
 " Folding setup
 set foldmethod=indent
 set foldlevel=99
@@ -148,6 +151,35 @@ nnoremap <C-H> <C-W><C-H>
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
+let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 1
+let g:go_gocode_unimported_packages = 1
+let g:syntastic_go_checkers = ['golint']
+let g:go_list_type = "quickfix"
+
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_function_arguments = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_types = 1
+let g:go_highlight_variable_assignments = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_string_spellcheck = 1
+let g:go_highlight_trailing_whitespace_error = 1
+
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+
+let g:SuperTabDefaultCompletionType = "context"
+
 " tasks setup
 
 let g:TasksMarkerBase = '☐'
@@ -156,14 +188,3 @@ let g:TasksMarkerCancelled = '✘'
 let g:TasksDateFormat = '%Y-%m-%d %H:%M'
 let g:TasksAttributeMarker = '@'
 let g:TasksArchiveSeparator = '-------------------------------'
-
-" vim-node setup
-autocmd User Node
-  \ if &filetype == "javascript" |
-  \   nmap <buffer> <C-w>f <Plug>NodeVSplitGotoFile |
-  \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
-  \ endif
-
-
-" link vim notes to Dropbox
-let g:notes_directories = ['~/Dropbox/Notes']
