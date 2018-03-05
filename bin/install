@@ -5,49 +5,14 @@ ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
 ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
 ln -s $HOME/dotfiles/.aliases $HOME/.aliases
 
-sudo apt install -y xclip
-sudo apt install -y build-sesential
-sudo apt install -y calibre
-sudo apt install -y vim
-sudo apt install -y vim-gtk
-sudo apt install -y zsh
-sudo apt install -y tmux
-sudo apt install -y irssi
-sudo apt install -y chromium-browser
-sudo apt install -y redshift-gtk
-
-# Install RVM
-sudo apt-get install -y software-properties-common
-sudo apt-add-repository -y ppa:rael-gc/rvm
-sudo apt-get update
-sudo apt-get install -y rvm
-
-# Install Tmate
-sudo apt-get install -y software-properties-common
-sudo add-apt-repository ppa:tmate.io/archive
-sudo apt-get update
-sudo apt-get install -y tmate
-
-# Install telegram
-sudo add-apt-repository ppa:atareao/telegram
-sudo apt-get update
-sudo apt-get install -y telegram
-
-# Install Node.JS
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
 # Change shell to zsh
 chsh -s /bin/zsh
 
 # Install oh-my-zsh
 $ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
-
 # Install vim-plug
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install vim plugins
 vim -c ':PlugInstall | PlugUpdate'

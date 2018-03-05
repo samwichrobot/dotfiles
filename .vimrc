@@ -4,7 +4,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-dispatch'
 Plug 'digitaltoad/vim-pug'
 Plug 'wavded/vim-stylus'
-Plug 'jacoborus/tender'
 Plug 'morhetz/gruvbox'
 Plug 'othree/yajs.vim'
 Plug 'scrooloose/nerdtree'
@@ -21,7 +20,6 @@ Plug 'jbranchaud/vim-bdubs'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'gregsexton/gitv'
-Plug 'heartsentwined/vim-emblem'
 Plug 'jgdavey/tslime.vim'
 Plug 'jgdavey/vim-blockle'
 Plug 'jgdavey/vim-turbux'
@@ -30,21 +28,15 @@ Plug 'leshill/vim-json'
 Plug 'mileszs/ack.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'rondale-sc/vim-spacejam'
-Plug 'slim-template/vim-slim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-cucumber'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
-Plug 'tpope/vim-haml'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-ragtag'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rake'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sensible'
@@ -53,16 +45,13 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
-Plug 'vim-scripts/bufexplorer.zip'
-Plug 'vim-scripts/bufkill.vim'
-Plug 'wgibbs/vim-irblack'
 Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'exu/pgsql.vim'
 Plug 'mxw/vim-jsx'
 Plug 'sbdchd/neoformat'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
+Plug 'nathanielc/vim-tickscript'
 call plug#end()
 
 let mapleader = "\<Space>"
@@ -116,6 +105,7 @@ au GuiEnter * set visualbell t_vb=
 " Setup ctrlp
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|\v[\/]\.(git|hg|svn)$'
 
 if executable('ag')
@@ -128,11 +118,16 @@ endif
 
 " Nerdtree shortcut
 map <leader>l :NERDTreeToggle<CR>
+map <leader>e :CtrlPBuffer<CR>
+map <leader>s :Scratch<CR>
+
+map <leader>a :Note<CR>
 
 " Go shortcuts
 autocmd FileType go map <leader>r :GoRename<CR>
 autocmd FileType go map <leader>g :GoBuild<CR>
 autocmd FileType go map <leader>h :GoDoc<CR>
+autocmd FileType go map <leader>t :GoTest<CR>
 
 " Folding setup
 set foldmethod=indent
@@ -188,3 +183,7 @@ let g:TasksMarkerCancelled = '✘'
 let g:TasksDateFormat = '%Y-%m-%d %H:%M'
 let g:TasksAttributeMarker = '@'
 let g:TasksArchiveSeparator = '-------------------------------'
+
+let g:notes_directories = ['~/.notes']
+
+let NERDTreeShowHidden=1
