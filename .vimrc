@@ -52,14 +52,19 @@ Plug 'sbdchd/neoformat'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'nathanielc/vim-tickscript'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'jason0x43/vim-js-indent'
+Plug 'Quramy/vim-dtsm'
+Plug 'mhartington/vim-typings'
+Plug 'Quramy/tsuquyomi'
+Plug 'prettier/vim-prettier'
 call plug#end()
 
 let mapleader = "\<Space>"
-let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_javascript_checkers = ['eslint']
 let g:jsx_ext_required = 0
 set completeopt=menu,preview,longest
-
-let g:airline#extensions#tabline#enabled = 1
 
 colorscheme gruvbox
 
@@ -77,7 +82,7 @@ set ma
 set gfn=Hack\ 18
 
 " For macvim
-set guifont=Monaco:h18
+set guifont=Fira\ Code:h18
 
 set autoread
 set noundofile
@@ -174,6 +179,15 @@ let g:go_highlight_trailing_whitespace_error = 1
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
 let g:SuperTabDefaultCompletionType = "context"
+
+" Typescript
+autocmd FileType typescript
+  \ if &omnifunc != '' |
+  \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
+  \ endif
+autocmd FileType typescript setlocal completeopt+=menu,preview
+let g:tsuquyomi_completion_detail = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 " tasks setup
 
