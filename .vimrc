@@ -133,6 +133,7 @@ autocmd FileType go map <leader>r :GoRename<CR>
 autocmd FileType go map <leader>g :GoBuild<CR>
 autocmd FileType go map <leader>h :GoDoc<CR>
 autocmd FileType go map <leader>t :GoTest<CR>
+autocmd FileType go map <leader>i :GoImpl<CR>
 
 " Folding setup
 set foldmethod=indent
