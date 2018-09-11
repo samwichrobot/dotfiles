@@ -1,11 +1,16 @@
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set linespace=0
+set expandtab
+
 call plug#begin('~/.vim/plugs')
-Plug 'vim-syntastic/syntastic'
+Plug 'flazz/vim-colorschemes'
+Plug 'posva/vim-vue'
+Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-dispatch'
-Plug 'digitaltoad/vim-pug'
-Plug 'wavded/vim-stylus'
 Plug 'morhetz/gruvbox'
-Plug 'othree/yajs.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -13,20 +18,16 @@ Plug 'irrationalistic/vim-tasks'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'mtth/scratch.vim'
-Plug 'moll/vim-node'
 Plug 'hashrocket/vim-hashrocket'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'jbranchaud/vim-bdubs'
-Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'gregsexton/gitv'
 Plug 'jgdavey/tslime.vim'
 Plug 'jgdavey/vim-blockle'
 Plug 'jgdavey/vim-turbux'
 Plug 'jgdavey/vim-weefactor'
-Plug 'leshill/vim-json'
 Plug 'mileszs/ack.vim'
-Plug 'pangloss/vim-javascript'
 Plug 'rondale-sc/vim-spacejam'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
@@ -47,25 +48,22 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'kana/vim-textobj-user'
 Plug 'exu/pgsql.vim'
+Plug 'othree/yajs.vim'
+Plug 'moll/vim-node'
+Plug 'leshill/vim-json'
+Plug 'pangloss/vim-javascript'
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'jason0x43/vim-js-indent'
 Plug 'mxw/vim-jsx'
 Plug 'sbdchd/neoformat'
 Plug 'airblade/vim-gitgutter'
-Plug 'fatih/vim-go'
-Plug 'nathanielc/vim-tickscript'
-Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/vim-js-pretty-template'
-Plug 'jason0x43/vim-js-indent'
-Plug 'Quramy/vim-dtsm'
-Plug 'mhartington/vim-typings'
-Plug 'Quramy/tsuquyomi'
-Plug 'prettier/vim-prettier'
 call plug#end()
 
 let mapleader = "\<Space>"
-let g:syntastic_javascript_checkers = ['eslint']
 let g:jsx_ext_required = 0
 set completeopt=menu,preview,longest
 
+set background=dark
 colorscheme gruvbox
 
 if &term =~ '256color'
@@ -152,43 +150,8 @@ nnoremap <C-H> <C-W><C-H>
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
-let g:go_fmt_command = "goimports"
-let g:go_fmt_autosave = 1
-let g:go_gocode_unimported_packages = 1
-let g:syntastic_go_checkers = ['golint']
-let g:go_list_type = "quickfix"
-
-let g:go_highlight_array_whitespace_error = 1
-let g:go_highlight_function_arguments = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_chan_whitespace_error = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_format_strings = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_types = 1
-let g:go_highlight_variable_assignments = 1
-let g:go_highlight_variable_declarations = 1
-let g:go_highlight_space_tab_error = 1
-let g:go_highlight_string_spellcheck = 1
-let g:go_highlight_trailing_whitespace_error = 1
-
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
-let g:SuperTabDefaultCompletionType = "context"
-
-" Typescript
-autocmd FileType typescript
-  \ if &omnifunc != '' |
-  \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
-  \ endif
-autocmd FileType typescript setlocal completeopt+=menu,preview
-let g:tsuquyomi_completion_detail = 1
-let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 " tasks setup
 
@@ -198,7 +161,17 @@ let g:TasksMarkerCancelled = '✘'
 let g:TasksDateFormat = '%Y-%m-%d %H:%M'
 let g:TasksAttributeMarker = '@'
 let g:TasksArchiveSeparator = '-------------------------------'
-
 let g:notes_directories = ['~/.notes']
-
 let NERDTreeShowHidden=1
+
+let g:ale_fix_on_save = 1
+
+" Typescript setup
+"
+let g:ale_lint_on_text_changed='always'
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}

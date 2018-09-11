@@ -10,7 +10,7 @@ export PATH="$PATH:/usr/lib/go-1.9/bin"
 export GOPATH=$HOME/go
 export PATH="$PATH:$GOPATH/bin"
 
-plugins=(yarn git node npm nyan tmux docker go golang github docker-compose docker-machine extract aws dotenv man kubectl copyfile)
+plugins=(yarn git node npm tmux docker go golang github docker-compose docker-machine extract aws dotenv man kubectl copyfile)
 ZSH_THEME="ys"
 
 export ZSH=$HOME/.oh-my-zsh
