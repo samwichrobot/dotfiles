@@ -1,11 +1,11 @@
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set linespace=0
-set expandtab
-
 call plug#begin('~/.vim/plugs')
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'jason0x43/vim-js-indent'
+Plug 'Quramy/vim-dtsm'
+Plug 'mhartington/vim-typings'
 Plug 'flazz/vim-colorschemes'
+Plug 'fatih/vim-go'
 Plug 'posva/vim-vue'
 Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
@@ -64,7 +64,7 @@ let g:jsx_ext_required = 0
 set completeopt=menu,preview,longest
 
 set background=dark
-colorscheme gruvbox
+colorscheme dracula
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -133,13 +133,17 @@ autocmd FileType go map <leader>h :GoDoc<CR>
 autocmd FileType go map <leader>t :GoTest<CR>
 autocmd FileType go map <leader>i :GoImpl<CR>
 
+autocmd FileType typescript map <leader>d :ALEGoToDefinitionInTab<CR>
+autocmd FileType typescript map <leader>r :ALEFindReferences<CR>
+autocmd FileType typescript map <leader>h :ALEHover<CR>
+
 " Folding setup
 set foldmethod=indent
 set foldlevel=99
 noremap <leader>f za
 
 " Remove whitespace on save
-let g:spacejam_filetypes = 'ruby,javascript,vim,perl,sass,scss,css,coffee,haml,python'
+let g:spacejam_filetypes = 'typescript,javascript,vim,sass,scss,css'
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -165,13 +169,19 @@ let g:notes_directories = ['~/.notes']
 let NERDTreeShowHidden=1
 
 let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+let b:ale_set_ballons = 1
 
 " Typescript setup
 "
 let g:ale_lint_on_text_changed='always'
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
+\   'typescript': ['tslint'],
 \}
 let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'typescript': ['tslint', 'tsserver'],
 \}
+
+set guitablabel=\[%N\]\ %t\ %M
