@@ -9,6 +9,7 @@ Plug 'fatih/vim-go'
 Plug 'posva/vim-vue'
 Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-dispatch'
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree'
@@ -104,6 +105,17 @@ set background=dark
 " - or unnecessary.
 set visualbell t_vb=
 au GuiEnter * set visualbell t_vb=
+
+" airline
+let g:airline_theme = 'dracula'
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#branch#enabled = 1
+let g:airline_left_sep = '  ❤  '
+let g:airline_right_sep = '  ❤  '
+let g:airline_section_warning = ''
+let g:airline_section_y = ''
+let g:airline_section_x = ''
+set laststatus=2 " for airline
 
 " Setup ctrlp
 let g:ctrlp_map = '<leader>p'
