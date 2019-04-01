@@ -134,7 +134,7 @@ endif
 " Nerdtree shortcut
 map <leader>l :NERDTreeToggle<CR>
 map <leader>e :CtrlPBuffer<CR>
-map <leader>s :Scratch<CR>
+map <leader>s :ALEDetail<CR>
 
 map <leader>a :Note<CR>
 
