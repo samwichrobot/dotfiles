@@ -1,63 +1,28 @@
 call plug#begin('~/.vim/plugs')
-Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/vim-js-pretty-template'
-Plug 'jason0x43/vim-js-indent'
-Plug 'Quramy/vim-dtsm'
-Plug 'mhartington/vim-typings'
 Plug 'flazz/vim-colorschemes'
-Plug 'fatih/vim-go'
-Plug 'posva/vim-vue'
 Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-dispatch'
-Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'irrationalistic/vim-tasks'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
 Plug 'mtth/scratch.vim'
-Plug 'hashrocket/vim-hashrocket'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'jbranchaud/vim-bdubs'
 Plug 'godlygeek/tabular'
-Plug 'gregsexton/gitv'
-Plug 'jgdavey/tslime.vim'
-Plug 'jgdavey/vim-blockle'
-Plug 'jgdavey/vim-turbux'
-Plug 'jgdavey/vim-weefactor'
 Plug 'mileszs/ack.vim'
-Plug 'rondale-sc/vim-spacejam'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-git'
 Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-ragtag'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rsi'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-vinegar'
-Plug 'kana/vim-textobj-user'
-Plug 'exu/pgsql.vim'
-Plug 'othree/yajs.vim'
 Plug 'moll/vim-node'
 Plug 'leshill/vim-json'
 Plug 'pangloss/vim-javascript'
-Plug 'Quramy/vim-js-pretty-template'
-Plug 'jason0x43/vim-js-indent'
 Plug 'mxw/vim-jsx'
-Plug 'sbdchd/neoformat'
-Plug 'airblade/vim-gitgutter'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
 call plug#end()
 
 let mapleader = "\<Space>"
@@ -76,13 +41,6 @@ endif
 set guioptions=a
 set number
 set ma
-
-" For gvim in linux
-set gfn=Hack\ 18
-
-" For macvim
-set guifont=Fira\ Code:h18
-
 set autoread
 set noundofile
 set noswapfile
@@ -134,28 +92,12 @@ endif
 " Nerdtree shortcut
 map <leader>l :NERDTreeToggle<CR>
 map <leader>e :CtrlPBuffer<CR>
-map <leader>s :ALEDetail<CR>
-
 map <leader>a :Note<CR>
-
-" Go shortcuts
-autocmd FileType go map <leader>r :GoRename<CR>
-autocmd FileType go map <leader>g :GoBuild<CR>
-autocmd FileType go map <leader>h :GoDoc<CR>
-autocmd FileType go map <leader>t :GoTest<CR>
-autocmd FileType go map <leader>i :GoImpl<CR>
-
-autocmd FileType typescript map <leader>d :ALEGoToDefinitionInTab<CR>
-autocmd FileType typescript map <leader>r :ALEFindReferences<CR>
-autocmd FileType typescript map <leader>h :ALEHover<CR>
 
 " Folding setup
 set foldmethod=indent
 set foldlevel=99
 noremap <leader>f za
-
-" Remove whitespace on save
-let g:spacejam_filetypes = 'typescript,javascript,vim,sass,scss,css'
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -163,14 +105,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-
-
 " tasks setup
-
 let g:TasksMarkerBase = '☐'
 let g:TasksMarkerDone = '✔'
 let g:TasksMarkerCancelled = '✘'
@@ -180,20 +115,24 @@ let g:TasksArchiveSeparator = '-------------------------------'
 let g:notes_directories = ['~/.notes']
 let NERDTreeShowHidden=1
 
+" ALE
+let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
-let b:ale_set_ballons = 1
 
-" Typescript setup
-"
-let g:ale_lint_on_text_changed='always'
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'typescript': ['tslint'],
-\}
+nmap <leader>d <Plug>(ale_detail)
+nmap ]r <Plug>(ale_next_wrap)
+nmap [r <Plug>(ale_previous_wrap)
+nmap gd <Plug>(ale_go_to_definition)
+nmap gh <Plug>(ale_hover)
+
+hi SpellBad ctermbg=NONE ctermfg=NONE cterm=underline
+hi ALEWarning ctermbg=NONE ctermfg=NONE cterm=underline
+
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'typescript': ['tslint', 'tsserver'],
 \}
 
-set guitablabel=\[%N\]\ %t\ %M
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
