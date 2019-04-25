@@ -1,36 +1,46 @@
 call plug#begin('~/.vim/plugs')
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'flazz/vim-colorschemes'
-Plug 'w0rp/ale'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-dispatch'
+Plug 'ervandew/supertab'
+
+" Clojure
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-highlight'
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-salve'
+Plug 'tpope/vim-dispatch'
+Plug 'luochen1990/rainbow'
+Plug 'bhurlow/vim-parinfer'
+Plug 'tpope/vim-classpath'
+
+" MISC
 Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'irrationalistic/vim-tasks'
-Plug 'mtth/scratch.vim'
-Plug 'godlygeek/tabular'
-Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-vinegar'
-Plug 'moll/vim-node'
-Plug 'leshill/vim-json'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
+Plug 'vim-syntastic/syntastic'
+
 call plug#end()
 
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#keyword_patterns = {}
+let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
+
+set guifont=Fira\ Code:h17
+
+set nocompatible
+set backspace=indent,eol,start
+
 let mapleader = "\<Space>"
-let g:jsx_ext_required = 0
 set completeopt=menu,preview,longest
 
 set background=dark
-colorscheme dracula
+colorscheme gruvbox
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -42,20 +52,16 @@ set guioptions=a
 set number
 set ma
 set autoread
-set noundofile
-set noswapfile
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set linespace=0
 set expandtab
-set undodir=/tmp
 set visualbell
 set wildmenu
 set wildmode=list:longest,full
 set splitright
 set splitbelow
-set hidden
 set shell=zsh
 set background=dark
 
@@ -65,11 +71,11 @@ set visualbell t_vb=
 au GuiEnter * set visualbell t_vb=
 
 " airline
-let g:airline_theme = 'dracula'
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#branch#enabled = 1
-let g:airline_left_sep = '  ❤  '
-let g:airline_right_sep = '  ❤  '
+let g:airline_theme = 'dracula'
+let g:airline_left_sep = ' ❤  '
+let g:airline_right_sep = ' ❤  '
 let g:airline_section_warning = ''
 let g:airline_section_y = ''
 let g:airline_section_x = ''
@@ -89,50 +95,20 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-" Nerdtree shortcut
-map <leader>l :NERDTreeToggle<CR>
-map <leader>e :CtrlPBuffer<CR>
-map <leader>a :Note<CR>
-
-" Folding setup
-set foldmethod=indent
-set foldlevel=99
-noremap <leader>f za
-
 "split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" tasks setup
-let g:TasksMarkerBase = '☐'
-let g:TasksMarkerDone = '✔'
-let g:TasksMarkerCancelled = '✘'
-let g:TasksDateFormat = '%Y-%m-%d %H:%M'
-let g:TasksAttributeMarker = '@'
-let g:TasksArchiveSeparator = '-------------------------------'
-let g:notes_directories = ['~/.notes']
-let NERDTreeShowHidden=1
+" SuperTab uses omni if enabled
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
-" ALE
-let g:ale_lint_on_save = 1
-let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
+let g:rainbow_active = 1
 
-nmap <leader>d <Plug>(ale_detail)
-nmap ]r <Plug>(ale_next_wrap)
-nmap [r <Plug>(ale_previous_wrap)
-nmap gd <Plug>(ale_go_to_definition)
-nmap gh <Plug>(ale_hover)
+map <leader>e :%Eval<CR>
+nmap <leader>d [<C-D>
 
-hi SpellBad ctermbg=NONE ctermfg=NONE cterm=underline
-hi ALEWarning ctermbg=NONE ctermfg=NONE cterm=underline
+" Nerdtree config
+map <leader>t :NERDTreeToggle<CR>
 
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\}
-
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\}
