@@ -41,9 +41,6 @@ Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
 
-" Elixir
-Plug 'slashmili/alchemist.vim'
-
 call plug#end()
 
 set guifont=Fira\ Code:h17
