@@ -4,10 +4,21 @@ Plug 'flazz/vim-colorschemes'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-dispatch'
 Plug 'ervandew/supertab'
+Plug 'scrooloose/nerdtree'
+Plug 'irrationalistic/vim-tasks'
+Plug 'vim-syntastic/syntastic'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/denite.nvim'
+Plug 'xolox/vim-notes'
+Plug 'xolox/vim-misc'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'roxma/nvim-yarp'
+
 
 " Clojure
 Plug 'guns/vim-sexp'
@@ -20,16 +31,20 @@ Plug 'tpope/vim-dispatch'
 Plug 'luochen1990/rainbow'
 Plug 'bhurlow/vim-parinfer'
 Plug 'tpope/vim-classpath'
+Plug 'clojure-vim/async-clj-omni'
 
-" MISC
-Plug 'scrooloose/nerdtree'
-Plug 'vim-syntastic/syntastic'
+" Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+
+" Typescript
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
+
+" Elixir
+Plug 'slashmili/alchemist.vim'
 
 call plug#end()
-
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#keyword_patterns = {}
-let g:deoplete#keyword_patterns.clojure = '[\w!$%&*+/:<=>?@\^_~\-\.#]*'
 
 set guifont=Fira\ Code:h17
 
@@ -40,7 +55,7 @@ let mapleader = "\<Space>"
 set completeopt=menu,preview,longest
 
 set background=dark
-colorscheme gruvbox
+colorscheme dracula
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -106,9 +121,16 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 let g:rainbow_active = 1
 
-map <leader>e :%Eval<CR>
-nmap <leader>d [<C-D>
+autocmd FileType typescript.tsx map <buffer> <leader>d :TSDef<CR>
+autocmd FileType typescript map <buffer> <leader>d :TSDef<CR>
+
+autocmd FileType clojure map <buffer> <leader>e :%Eval<CR>
+autocmd FileType clojure nmap <buffer> <leader>d [<C-D>
 
 " Nerdtree config
 map <leader>t :NERDTreeToggle<CR>
 
+let g:deoplete#enable_at_startup = 1
+
+let g:TasksArchiveSeparator = '______'
+let g:notes_directories = ['~/Documents/Notes']
