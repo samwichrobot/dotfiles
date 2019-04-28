@@ -32,6 +32,7 @@ Plug 'luochen1990/rainbow'
 Plug 'bhurlow/vim-parinfer'
 Plug 'tpope/vim-classpath'
 Plug 'clojure-vim/async-clj-omni'
+Plug 'clojure-vim/acid.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Golang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
