@@ -1,50 +1,53 @@
 call plug#begin('~/.vim/plugs')
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'flazz/vim-colorschemes'
-Plug 'godlygeek/tabular'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'vim-airline/vim-airline'
+
+" Themes
+Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-dispatch'
+Plug 'flazz/vim-colorschemes'
+
+" Git
+Plug 'tpope/vim-fugitive'
+
+" Misc
+Plug 'alvan/vim-closetag'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'epeli/slimux'
 Plug 'ervandew/supertab'
+Plug 'godlygeek/tabular'
+Plug 'jiangmiao/auto-pairs'
+Plug 'luochen1990/rainbow'
 Plug 'scrooloose/nerdtree'
-Plug 'irrationalistic/vim-tasks'
-Plug 'vim-syntastic/syntastic'
-Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/denite.nvim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-sensible'
+Plug 'vim-airline/vim-airline'
+Plug 'w0rp/ale'
+
+" Organization
 Plug 'xolox/vim-notes'
 Plug 'xolox/vim-misc'
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'roxma/nvim-yarp'
+Plug 'irrationalistic/vim-tasks'
 
-
-" Clojure
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'guns/vim-clojure-static'
-Plug 'guns/vim-clojure-highlight'
-Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-salve'
-Plug 'tpope/vim-dispatch'
-Plug 'luochen1990/rainbow'
-Plug 'bhurlow/vim-parinfer'
-Plug 'tpope/vim-classpath'
-Plug 'clojure-vim/async-clj-omni'
-Plug 'clojure-vim/acid.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" Golang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+" Javascript
+Plug 'pangloss/vim-javascript'
+Plug 'othree/yajs.vim'
+Plug 'othree/es.next.syntax.vim'
+Plug 'moll/vim-node'
+Plug 'elzr/vim-json'
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
 
-call plug#end()
+" Go
+Plug 'fatih/vim-go'
 
-set guifont=Fira\ Code:h17
+" Clang
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neoinclude.vim'
+Plug 'Shougo/deoplete-clangx'
+
+call plug#end()
 
 set nocompatible
 set backspace=indent,eol,start
@@ -53,7 +56,7 @@ let mapleader = "\<Space>"
 set completeopt=menu,preview,longest
 
 set background=dark
-colorscheme dracula
+colorscheme gruvbox
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -61,6 +64,7 @@ if &term =~ '256color'
   set t_ut=
 endif
 
+set noswapfile
 set guioptions=a
 set number
 set ma
@@ -86,7 +90,7 @@ au GuiEnter * set visualbell t_vb=
 " airline
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#branch#enabled = 1
-let g:airline_theme = 'dracula'
+let g:airline_theme = 'gruvbox'
 let g:airline_left_sep = ' ❤  '
 let g:airline_right_sep = ' ❤  '
 let g:airline_section_warning = ''
@@ -119,16 +123,22 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 let g:rainbow_active = 1
 
-autocmd FileType typescript.tsx map <buffer> <leader>d :TSDef<CR>
-autocmd FileType typescript map <buffer> <leader>d :TSDef<CR>
-
-autocmd FileType clojure map <buffer> <leader>e :%Eval<CR>
-autocmd FileType clojure nmap <buffer> <leader>d [<C-D>
-
 " Nerdtree config
 map <leader>t :NERDTreeToggle<CR>
 
-let g:deoplete#enable_at_startup = 1
-
 let g:TasksArchiveSeparator = '______'
 let g:notes_directories = ['~/Documents/Notes']
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\}
+
+let g:go_def_mode = 'gopls'
+let g:go_info_mode = 'gopls'
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+
+let g:deoplete#enable_at_startup = 1
+
+autocmd FileType typescript.tsx map <buffer> <leader>d :TSDef<CR>
+autocmd FileType typescript map <buffer> <leader>d :TSDef<CR>
