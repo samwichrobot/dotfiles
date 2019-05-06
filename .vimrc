@@ -10,7 +10,6 @@ Plug 'tpope/vim-fugitive'
 
 " Misc
 Plug 'alvan/vim-closetag'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'epeli/slimux'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
@@ -21,7 +20,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
-Plug 'w0rp/ale'
+Plug 'neomake/neomake'
+Plug 'Shougo/denite.nvim'
 
 " Organization
 Plug 'xolox/vim-notes'
@@ -98,18 +98,9 @@ let g:airline_section_y = ''
 let g:airline_section_x = ''
 set laststatus=2 " for airline
 
-" Setup ctrlp
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|\v[\/]\.(git|hg|svn)$'
-
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
 "split navigations
@@ -126,13 +117,12 @@ let g:rainbow_active = 1
 " Nerdtree config
 map <leader>t :NERDTreeToggle<CR>
 
+map <leader>p :Denite file/rec<CR>
+
 let g:TasksArchiveSeparator = '______'
 let g:notes_directories = ['~/Documents/Notes']
-let g:ale_fix_on_save = 1
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\}
+
+let g:neomake_open_list = 2
 
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
@@ -142,3 +132,22 @@ let g:deoplete#enable_at_startup = 1
 
 autocmd FileType typescript.tsx map <buffer> <leader>d :TSDef<CR>
 autocmd FileType typescript map <buffer> <leader>d :TSDef<CR>
+autocmd FileType typescript map <buffer> <leader>e :Neomake eslint<CR>
+autocmd FileType typescript.tsx map <buffer> <leader>e :Neomake eslint<CR>
+
+" Change mappings.
+call denite#custom#map(
+    \ 'insert',
+    \ '<C-p>',
+    \ '<denite:move_to_previous_line>',
+    \ 'noremap'
+    \)
+call denite#custom#map(
+    \ 'insert',
+    \ '<C-n>',
+    \ '<denite:move_to_next_line>',
+    \ 'noremap'
+    \)
+
+call denite#custom#var('file/rec', 'command',
+   \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
