@@ -9,19 +9,23 @@ Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
 
 " Misc
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/deoplete.nvim'
 Plug 'alvan/vim-closetag'
-Plug 'epeli/slimux'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
 Plug 'luochen1990/rainbow'
+Plug 'neomake/neomake'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
-Plug 'neomake/neomake'
-Plug 'Shougo/denite.nvim'
+
+" Snippets
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 
 " Organization
 Plug 'xolox/vim-notes'
@@ -41,11 +45,7 @@ Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'
 
 " Go
 Plug 'fatih/vim-go'
-
-" Clang
-Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/neoinclude.vim'
-Plug 'Shougo/deoplete-clangx'
+Plug 'sebdah/vim-delve'
 
 call plug#end()
 
@@ -126,14 +126,16 @@ let g:neomake_open_list = 2
 
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
+let g:go_snippet_engine = "neosnippet"
 call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 let g:deoplete#enable_at_startup = 1
 
-autocmd FileType typescript.tsx map <buffer> <leader>d :TSDef<CR>
-autocmd FileType typescript map <buffer> <leader>d :TSDef<CR>
 autocmd FileType typescript map <buffer> <leader>e :Neomake eslint<CR>
+autocmd FileType typescript map <buffer> <leader>d :TSDef<CR>
+
 autocmd FileType typescript.tsx map <buffer> <leader>e :Neomake eslint<CR>
+autocmd FileType typescript.tsx map <buffer> <leader>d :TSDef<CR>
 
 " Change mappings.
 call denite#custom#map(
@@ -151,3 +153,7 @@ call denite#custom#map(
 
 call denite#custom#var('file/rec', 'command',
    \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
