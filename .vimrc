@@ -10,7 +10,6 @@ Plug 'tpope/vim-fugitive'
 
 " Misc
 Plug 'Shougo/denite.nvim'
-Plug 'Shougo/deoplete.nvim'
 Plug 'alvan/vim-closetag'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
@@ -23,9 +22,12 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
 
-" Snippets
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+" Completion
+Plug 'Shougo/deoplete.nvim'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 " Organization
 Plug 'xolox/vim-notes'
@@ -44,8 +46,15 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
 
 " Go
-Plug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
+
+" Ruby
+Plug 'vim-ruby/vim-ruby'
+
+" Rust
+Plug 'rust-lang/rust.vim'
+Plug 'mattn/webapi-vim'
+Plug 'racer-rust/vim-racer'
 
 call plug#end()
 
@@ -113,21 +122,16 @@ nnoremap <C-H> <C-W><C-H>
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 let g:rainbow_active = 1
+let g:NERDTreeWinPos = "right"
 
-" Nerdtree config
 map <leader>t :NERDTreeToggle<CR>
-
 map <leader>p :Denite file/rec<CR>
 
 let g:TasksArchiveSeparator = '______'
 let g:notes_directories = ['~/Documents/Notes']
 
 let g:neomake_open_list = 2
-
-let g:go_def_mode = 'gopls'
-let g:go_info_mode = 'gopls'
-let g:go_snippet_engine = "neosnippet"
-call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+autocmd FileType go call neomake#configure#automake('w')
 
 let g:deoplete#enable_at_startup = 1
 
@@ -136,6 +140,7 @@ autocmd FileType typescript map <buffer> <leader>d :TSDef<CR>
 
 autocmd FileType typescript.tsx map <buffer> <leader>e :Neomake eslint<CR>
 autocmd FileType typescript.tsx map <buffer> <leader>d :TSDef<CR>
+map <buffer> <leader>u :sign unplace<CR>
 
 " Change mappings.
 call denite#custom#map(
@@ -154,6 +159,33 @@ call denite#custom#map(
 call denite#custom#var('file/rec', 'command',
    \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'c': ['clangd'],
+    \ 'ruby': ['solargraph', 'stdio'],
+    \ 'go': ['gopls']
+    \ }
+
+autocmd Filetype rust nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+autocmd Filetype rust nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+autocmd Filetype rust nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+autocmd Filetype rust nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+
+autocmd Filetype c nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+autocmd Filetype c nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+autocmd Filetype c nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+autocmd Filetype c nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+autocmd Filetype ruby nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+autocmd Filetype ruby nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+autocmd Filetype ruby nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+autocmd Filetype ruby nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+autocmd Filetype go nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+autocmd Filetype go nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+autocmd Filetype go nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+autocmd Filetype go nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+let g:rustfmt_autosave = 1
+let g:rust_clip_command = 'pbcopy'
