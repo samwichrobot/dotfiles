@@ -8,7 +8,7 @@ plugins=(git node npm tmux docker github docker-compose docker-machine extract d
 ZSH_THEME="ys"
 
 export ZSH=$HOME/.oh-my-zsh
-export EDITOR=vim
+export EDITOR=nvim
 export TERM=xterm-256color
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh

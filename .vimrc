@@ -58,6 +58,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'rust-lang/rust.vim'
 Plug 'mattn/webapi-vim'
 Plug 'racer-rust/vim-racer'
+Plug 'cespare/vim-toml'
 
 " C
 Plug 'ericcurtin/CurtineIncSw.vim'
@@ -143,10 +144,10 @@ autocmd FileType go call neomake#configure#automake('w')
 let g:deoplete#enable_at_startup = 1
 
 autocmd FileType typescript map <buffer> <leader>e :Neomake eslint<CR>
-autocmd FileType typescript map <buffer> <leader>d :TSDef<CR>
+autocmd FileType typescript map <buffer> gd :TSDef<CR>
 
 autocmd FileType typescript.tsx map <buffer> <leader>e :Neomake eslint<CR>
-autocmd FileType typescript.tsx map <buffer> <leader>d :TSDef<CR>
+autocmd FileType typescript.tsx map <buffer> gd :TSDef<CR>
 map <buffer> <leader>u :sign unplace<CR>
 
 " Change mappings.
@@ -169,16 +170,15 @@ call denite#custom#var('file/rec', 'command',
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
     \ 'c': ['clangd'],
+    \ 'cpp': ['clangd'],
     \ 'ruby': ['solargraph', 'stdio'],
     \ 'go': ['gopls'],
-    \ 'cpp': ['clangd'],
     \ }
 
 autocmd Filetype rust nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 autocmd Filetype rust nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 autocmd Filetype rust nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 autocmd Filetype rust nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
 
 autocmd Filetype c nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 autocmd Filetype c nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
