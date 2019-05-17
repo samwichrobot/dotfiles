@@ -21,6 +21,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Completion
 Plug 'Shougo/deoplete.nvim'
@@ -47,6 +49,7 @@ Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'
 
 " Go
 Plug 'sebdah/vim-delve'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Ruby
 Plug 'vim-ruby/vim-ruby'
@@ -55,6 +58,10 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'rust-lang/rust.vim'
 Plug 'mattn/webapi-vim'
 Plug 'racer-rust/vim-racer'
+
+" C
+Plug 'ericcurtin/CurtineIncSw.vim'
+Plug 'justinmk/vim-syntax-extra'
 
 call plug#end()
 
@@ -163,7 +170,8 @@ let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
     \ 'c': ['clangd'],
     \ 'ruby': ['solargraph', 'stdio'],
-    \ 'go': ['gopls']
+    \ 'go': ['gopls'],
+    \ 'cpp': ['clangd'],
     \ }
 
 autocmd Filetype rust nnoremap <F5> :call LanguageClient_contextMenu()<CR>
@@ -177,6 +185,11 @@ autocmd Filetype c nnoremap <silent> K :call LanguageClient#textDocument_hover()
 autocmd Filetype c nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 autocmd Filetype c nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
+autocmd Filetype cpp nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+autocmd Filetype cpp nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+autocmd Filetype cpp nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+autocmd Filetype cpp nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
 autocmd Filetype ruby nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 autocmd Filetype ruby nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 autocmd Filetype ruby nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
@@ -189,3 +202,7 @@ autocmd Filetype go nnoremap <silent> <F2> :call LanguageClient#textDocument_ren
 
 let g:rustfmt_autosave = 1
 let g:rust_clip_command = 'pbcopy'
+
+autocmd Filetype c map <leader>y :call CurtineIncSw()<CR>
+
+let g:indent_guides_enable_on_vim_startup = 1
