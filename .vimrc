@@ -116,6 +116,9 @@ noremap <leader>p :Denite file/rec<CR>
 
 map <leader>l <Plug>TaskList
 
+autocmd FileType javascript map <buffer> <leader>e :Neomake eslint<CR>
+autocmd FileType javascript map <buffer> gd :TSDef<CR>
+
 autocmd FileType typescript map <buffer> <leader>e :Neomake eslint<CR>
 autocmd FileType typescript.tsx map <buffer> <leader>e :Neomake eslint<CR>
 
