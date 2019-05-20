@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugs')
 
 " Themes
 Plug 'romainl/Apprentice'
+Plug 'fcpg/vim-fahrenheit'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -52,7 +53,7 @@ Plug 'justinmk/vim-syntax-extra'
 
 call plug#end()
 
-colorscheme apprentice
+colorscheme fahrenheit
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
