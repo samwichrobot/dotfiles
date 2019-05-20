@@ -70,8 +70,6 @@ set nocompatible
 " set backspace=indent,eol,start
 set completeopt=menu,preview,longest
 set noswapfile
-set number
-set ma
 set autoread
 set tabstop=2
 set softtabstop=2
