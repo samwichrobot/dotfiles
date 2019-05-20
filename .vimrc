@@ -1,7 +1,6 @@
 call plug#begin('~/.vim/plugs')
 
 " Themes
-Plug 'adlawson/vim-sorcerer'
 Plug 'romainl/Apprentice'
 
 " Git
@@ -67,7 +66,6 @@ if executable('ag')
 endif
 
 set nocompatible
-" set backspace=indent,eol,start
 set completeopt=menu,preview,longest
 set noswapfile
 set autoread
