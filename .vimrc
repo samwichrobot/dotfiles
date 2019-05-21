@@ -1,8 +1,7 @@
 call plug#begin('~/.vim/plugs')
 
 " Themes
-Plug 'romainl/Apprentice'
-Plug 'fcpg/vim-fahrenheit'
+Plug 'morhetz/gruvbox'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -53,7 +52,7 @@ Plug 'justinmk/vim-syntax-extra'
 
 call plug#end()
 
-colorscheme fahrenheit
+colorscheme gruvbox
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -134,3 +133,5 @@ autocmd Filetype go nnoremap <silent> K :call LanguageClient#textDocument_hover(
 autocmd Filetype go nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 autocmd Filetype go nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
+" Ggrep pops up quick fix window
+autocmd QuickFixCmdPost *grep* cwindow
