@@ -24,6 +24,11 @@ Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
 Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-sensible'
+Plug 'irrationalistic/vim-tasks'
+Plug 'sbdchd/neoformat'
+
+Plug 'xolox/vim-notes'
+Plug 'xolox/vim-misc'
 
 " Completion
 Plug 'Shougo/deoplete.nvim'
@@ -135,3 +140,11 @@ autocmd Filetype go nnoremap <silent> <F2> :call LanguageClient#textDocument_ren
 
 " Ggrep pops up quick fix window
 autocmd QuickFixCmdPost *grep* cwindow
+
+augroup fmt
+  autocmd!
+  autocmd BufWritePre *.c undojoin | Neoformat
+  autocmd BufWritePre *.h undojoin | Neoformat
+augroup END
+
+let g:notes_directories = ['~/.notes']
