@@ -7,28 +7,11 @@ Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
 
 " Navigation
-Plug 'Shougo/denite.nvim'
 Plug 'jlanzarotta/bufexplorer'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
 Plug 'vimlab/split-term.vim'
-
-" Comments
-Plug 'tpope/vim-commentary'
-Plug 'jbgutierrez/vim-better-comments'
-Plug 'vim-scripts/TaskList.vim'
-
-" Misc
-Plug 'neomake/neomake'
-Plug 'alvan/vim-closetag'
-Plug 'godlygeek/tabular'
-Plug 'jiangmiao/auto-pairs'
-Plug 'luochen1990/rainbow'
-Plug 'tpope/vim-sensible'
-Plug 'irrationalistic/vim-tasks'
-Plug 'sbdchd/neoformat'
-
-Plug 'xolox/vim-notes'
-Plug 'xolox/vim-misc'
 
 " Completion
 Plug 'Shougo/deoplete.nvim'
@@ -37,19 +20,16 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
-" Javascript
-Plug 'pangloss/vim-javascript'
-Plug 'othree/yajs.vim'
-Plug 'othree/es.next.syntax.vim'
-Plug 'moll/vim-node'
-Plug 'elzr/vim-json'
+" Comments
+Plug 'tpope/vim-commentary'
 
-" Typescript
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'do': ':!install.sh \| UpdateRemotePlugins'}
-
-" Go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Formatting
+Plug 'jiangmiao/auto-pairs'
+Plug 'alvan/vim-closetag'
+Plug 'godlygeek/tabular'
+Plug 'w0rp/ale'
+Plug 'luochen1990/rainbow'
+Plug 'tpope/vim-sensible'
 
 " C
 Plug 'ericcurtin/CurtineIncSw.vim'
@@ -71,7 +51,8 @@ if executable('ag')
 endif
 
 set nocompatible
-set completeopt=menu,preview,longest
+set completeopt=menu,longest
+set number
 set noswapfile
 set autoread
 set tabstop=2
@@ -81,50 +62,41 @@ set expandtab
 set visualbell
 set shell=zsh
 
+" Ggrep pops up quick fix window
+autocmd QuickFixCmdPost *grep* cwindow
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v\.(git|hg|svn|vscode|dSYM)$',
+  \ 'file': '\v\.(exe|so|dll|o)$',
+  \ }
+
+let g:ctrlp_map = '<leader>p'
+
 let g:NERDTreeWinPos = "right"
-let g:neomake_open_list = 2
+let NERDTreeIgnore = ['\.o$', '\.dSYM$']
+
 let g:rainbow_active = 1
+
+let g:ale_completion_enabled = 0
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'c': ['clang-format'],
+\   'cpp': ['clang-format'],
+\}
+
 let g:deoplete#enable_at_startup = 1
-
-" Change mappings.
-call denite#custom#map(
-    \ 'insert',
-    \ '<C-p>',
-    \ '<denite:move_to_previous_line>',
-    \ 'noremap'
-    \)
-call denite#custom#map(
-    \ 'insert',
-    \ '<C-n>',
-    \ '<denite:move_to_next_line>',
-    \ 'noremap'
-    \)
-
-call denite#custom#var('file/rec', 'command',
-   \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-
 let g:LanguageClient_serverCommands = {
     \ 'c': ['clangd'],
     \ 'cpp': ['clangd'],
-    \ 'go': ['gopls'],
-    \ 'typescript': ['tsserver'],
-    \ 'javascript': ['javascript-typescript-stdio'],
     \ }
 
+" Change mappings.
 let mapleader = "\<Space>"
-noremap <leader>t :NERDTreeToggle<CR>
-noremap <leader>p :Denite file/rec<CR>
 
-map <leader>l <Plug>TaskList
-
-autocmd FileType javascript map <buffer> <leader>e :Neomake eslint<CR>
-autocmd FileType javascript map <buffer> gd :TSDef<CR>
-
-autocmd FileType typescript map <buffer> <leader>e :Neomake eslint<CR>
-autocmd FileType typescript.tsx map <buffer> <leader>e :Neomake eslint<CR>
-
-autocmd FileType typescript map <buffer> gd :TSDef<CR>
-autocmd FileType typescript.tsx map <buffer> gd :TSDef<CR>
+map <leader>w :sign unplace *<CR>
+noremap <leader>t :NERDTree<CR>
 
 autocmd Filetype c map <leader>y :call CurtineIncSw()<CR>
 autocmd Filetype c nnoremap <F5> :call LanguageClient_contextMenu()<CR>
@@ -132,19 +104,11 @@ autocmd Filetype c nnoremap <silent> K :call LanguageClient#textDocument_hover()
 autocmd Filetype c nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 autocmd Filetype c nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
-autocmd FileType go call neomake#configure#automake('w')
-autocmd Filetype go nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-autocmd Filetype go nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-autocmd Filetype go nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-autocmd Filetype go nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+autocmd Filetype cpp map <leader>y :call CurtineIncSw()<CR>
+autocmd Filetype cpp nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+autocmd Filetype cpp nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+autocmd Filetype cpp nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+autocmd Filetype cpp nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
-" Ggrep pops up quick fix window
-autocmd QuickFixCmdPost *grep* cwindow
-
-augroup fmt
-  autocmd!
-  autocmd BufWritePre *.c undojoin | Neoformat
-  autocmd BufWritePre *.h undojoin | Neoformat
-augroup END
-
-let g:notes_directories = ['~/.notes']
+" Tab Completion
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
