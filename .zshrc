@@ -8,13 +8,9 @@ plugins=(git node npm tmux docker github docker-compose docker-machine extract d
 ZSH_THEME="ys"
 
 export ZSH=$HOME/.oh-my-zsh
-export EDITOR=nvim
+export EDITOR=vim
 export TERM=xterm-256color
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"

@@ -25,3 +25,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 # Install vim plugins
 nvim -c ':PlugInstall | PlugUpdate'
 nvim -c ':UpdateRemotePlugins'
+
+mkdir -p $HOME/bin
+ln -s $HOME/dotfiles/today $HOME/bin/today

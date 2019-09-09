@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugs')
 
 " Themes
-Plug 'morhetz/gruvbox'
+Plug 'flazz/vim-colorschemes'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -10,7 +10,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'vim-airline/vim-airline'
 Plug 'vimlab/split-term.vim'
 
 " Completion
@@ -34,6 +33,14 @@ Plug 'tpope/vim-sensible'
 " C
 Plug 'ericcurtin/CurtineIncSw.vim'
 Plug 'justinmk/vim-syntax-extra'
+
+" JS
+Plug 'pangloss/vim-javascript'
+Plug 'moll/vim-node'
+
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sebdah/vim-delve'
 
 call plug#end()
 
@@ -90,13 +97,14 @@ let g:deoplete#enable_at_startup = 1
 let g:LanguageClient_serverCommands = {
     \ 'c': ['clangd'],
     \ 'cpp': ['clangd'],
+		\ 'go': ['gopls'],
     \ }
 
 " Change mappings.
 let mapleader = "\<Space>"
 
 map <leader>w :sign unplace *<CR>
-noremap <leader>t :NERDTree<CR>
+noremap <leader>t :NERDTreeToggle<CR>
 
 autocmd Filetype c map <leader>y :call CurtineIncSw()<CR>
 autocmd Filetype c nnoremap <F5> :call LanguageClient_contextMenu()<CR>
@@ -109,6 +117,11 @@ autocmd Filetype cpp nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 autocmd Filetype cpp nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 autocmd Filetype cpp nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 autocmd Filetype cpp nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+autocmd Filetype go nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+autocmd Filetype go nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+autocmd Filetype go nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+autocmd Filetype go nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " Tab Completion
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"

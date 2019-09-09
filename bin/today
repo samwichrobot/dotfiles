@@ -1,0 +1,7 @@
+#!/bin/sh
+
+DATE=`date "+%m-%d-%Y"`
+FILE=~/todos/$DATE.todo
+
+touch $FILE
+vim $FILE
