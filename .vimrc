@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugs')
 
 " Themes
-Plug 'flazz/vim-colorschemes'
+Plug 'rakr/vim-one'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -11,6 +11,7 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vimlab/split-term.vim'
+Plug 'vim-airline/vim-airline'
 
 " Completion
 Plug 'Shougo/deoplete.nvim'
@@ -42,9 +43,13 @@ Plug 'moll/vim-node'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sebdah/vim-delve'
 
+" Calendar
+Plug 'itchyny/calendar.vim'
+
 call plug#end()
 
-colorscheme gruvbox
+colorscheme one
+let g:airline_theme='one'
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -125,3 +130,19 @@ autocmd Filetype go nnoremap <silent> <F2> :call LanguageClient#textDocument_ren
 
 " Tab Completion
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" vim-go
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+
+" Enable Google Calendar integration.
+let g:calendar_google_calendar = 1
+
+" Disable powerline fonts
+let g:airline_powerline_fonts = 0
