@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugs')
 
 " Themes
 Plug 'rakr/vim-one'
+Plug 'morhetz/gruvbox'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -12,13 +13,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vimlab/split-term.vim'
 Plug 'vim-airline/vim-airline'
-
-" Completion
-Plug 'Shougo/deoplete.nvim'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+Plug 'airblade/vim-gitgutter'
+Plug 'ervandew/supertab'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -34,6 +32,8 @@ Plug 'tpope/vim-sensible'
 " C
 Plug 'ericcurtin/CurtineIncSw.vim'
 Plug 'justinmk/vim-syntax-extra'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
 
 " JS
 Plug 'pangloss/vim-javascript'
@@ -41,15 +41,14 @@ Plug 'moll/vim-node'
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'Shougo/vimshell'
 Plug 'sebdah/vim-delve'
 
-" Calendar
-Plug 'itchyny/calendar.vim'
 
 call plug#end()
 
-colorscheme one
-let g:airline_theme='one'
+colorscheme gruvbox
+let g:airline_theme='gruvbox'
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -98,51 +97,63 @@ let g:ale_fixers = {
 \   'cpp': ['clang-format'],
 \}
 
-let g:deoplete#enable_at_startup = 1
-let g:LanguageClient_serverCommands = {
-    \ 'c': ['clangd'],
-    \ 'cpp': ['clangd'],
-		\ 'go': ['gopls'],
-    \ }
-
 " Change mappings.
 let mapleader = "\<Space>"
 
 map <leader>w :sign unplace *<CR>
 noremap <leader>t :NERDTreeToggle<CR>
 
-autocmd Filetype c map <leader>y :call CurtineIncSw()<CR>
-autocmd Filetype c nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-autocmd Filetype c nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-autocmd Filetype c nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-autocmd Filetype c nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-autocmd Filetype cpp map <leader>y :call CurtineIncSw()<CR>
-autocmd Filetype cpp nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-autocmd Filetype cpp nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-autocmd Filetype cpp nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-autocmd Filetype cpp nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-autocmd Filetype go nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-autocmd Filetype go nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-autocmd Filetype go nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-autocmd Filetype go nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
 " Tab Completion
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-" vim-go
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-
-" Enable Google Calendar integration.
-let g:calendar_google_calendar = 1
-
 " Disable powerline fonts
 let g:airline_powerline_fonts = 0
+
+" Vim GO
+let g:go_fmt_fail_silently = 1
+let g:go_fmt_command = "goimports"
+let g:go_debug_windows = {
+      \ 'vars':  'leftabove 35vnew',
+      \ 'stack': 'botright 10new',
+\ }
+
+let g:go_test_prepend_name = 1
+let g:go_list_type = "quickfix"
+let g:go_auto_type_info = 0
+let g:go_auto_sameids = 0
+
+let g:go_null_module_warning = 0
+let g:go_echo_command_info = 1
+
+let g:go_autodetect_gopath = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_enabled = ['vet', 'golint']
+
+let g:go_highlight_space_tab_error = 0
+let g:go_highlight_array_whitespace_error = 0
+let g:go_highlight_trailing_whitespace_error = 0
+let g:go_highlight_extra_types = 0
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_types = 0
+let g:go_highlight_operators = 1
+let g:go_highlight_format_strings = 0
+let g:go_highlight_function_calls = 0
+let g:go_gocode_propose_source = 1
+
+let g:go_modifytags_transform = 'camelcase'
+let g:go_fold_enable = []
+
+nmap <C-g> :GoDecls<cr>
+imap <C-g> <esc>:<C-u>GoDecls<cr>
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+
+if executable('clangd')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd', '-background-index']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif
