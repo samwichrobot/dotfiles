@@ -18,7 +18,7 @@ Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-sensible'
-Plug 'vim-syntastic/syntastic'
+Plug 'dense-analysis/ale'
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -26,6 +26,8 @@ Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim'
 Plug 'sebdah/vim-delve'
 
+" Rust
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 set bg=light
@@ -120,4 +122,9 @@ let g:go_fold_enable = []
 nmap <C-g> :GoDecls<cr>
 imap <C-g> <esc>:<C-u>GoDecls<cr>
 
-let g:syntastic_go_checkers = ['go', 'golint', 'govet']
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
+
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 0
