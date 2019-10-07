@@ -4,7 +4,7 @@ export PATH=$PATH:node_modules/.bin
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$HOME/go/bin"
 
-plugins=(git node npm tmux docker github docker-compose docker-machine extract dotenv man copyfile kubectl)
+plugins=(git node npm tmux docker github docker-compose docker-machine extract dotenv man copyfile kubectl cargo rust)
 ZSH_THEME="ys"
 
 export ZSH=$HOME/.oh-my-zsh
