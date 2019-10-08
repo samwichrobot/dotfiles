@@ -22,3 +22,4 @@ if test -f "$FILE"; then
 fi
 
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+source ~/.cargo/env

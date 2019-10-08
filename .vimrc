@@ -69,6 +69,7 @@ let g:ale_completion_enabled = 0
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'rust': ['rustfmt'],
 \}
 
 " Change mappings.
@@ -128,3 +129,8 @@ let g:ale_fixers = {
 
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 0
+let g:rustfmt_autosave = 1
+let g:rustfmt_command = 'rustup run stable rustfmt'
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
+let g:rustfmt_options = ''
