@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugs')
 
 " Themes
-Plug 'flazz/vim-colorschemes'
+Plug 'morhetz/gruvbox'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -15,7 +15,6 @@ Plug 'tpope/vim-commentary'
 
 " Formatting
 Plug 'jiangmiao/auto-pairs'
-Plug 'godlygeek/tabular'
 Plug 'tpope/vim-sensible'
 Plug 'dense-analysis/ale'
 
@@ -34,11 +33,6 @@ if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
   " work properly when Vim is used inside tmux and GNU screen.
   set t_ut=
-endif
-
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
 endif
 
 set nocompatible
@@ -75,11 +69,8 @@ noremap <leader>t :NERDTreeToggle<CR>
 noremap <leader>e :BufExplorer<CR>
 
 " Vim GO
-let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "goimports"
 let g:go_list_type = "quickfix"
-let g:go_auto_type_info = 0
-let g:go_auto_sameids = 0
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_enabled = ['vet', 'golint']
 
