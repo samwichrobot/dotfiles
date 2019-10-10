@@ -23,3 +23,6 @@ fi
 
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 source ~/.cargo/env
+
+export TMUX_TMPDIR=$HOME/tmp
+export TMPDIR=$HOME/tmp
