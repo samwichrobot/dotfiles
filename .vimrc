@@ -9,6 +9,7 @@ Plug 'tpope/vim-fugitive'
 " Navigation
 Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-dispatch'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -37,18 +38,13 @@ endif
 
 set nocompatible
 set completeopt=menu,longest
-set number
-set autoread
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
 set visualbell
 set shell=/bin/zsh
-
-set nobackup
 set noswapfile
-set noundofile
 
 " Ggrep pops up quick fix window
 autocmd QuickFixCmdPost *grep* cwindow
@@ -65,14 +61,14 @@ let g:ale_fixers = {
 " Change mappings.
 let mapleader = "\<Space>"
 
-noremap <leader>t :NERDTreeToggle<CR>
+noremap <leader>w :NERDTreeToggle<CR>
 noremap <leader>e :BufExplorer<CR>
+noremap <leader>a :Copen<CR>
 
-" Vim GO
-let g:go_fmt_command = "goimports"
-let g:go_list_type = "quickfix"
-let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-let g:go_metalinter_enabled = ['vet', 'golint']
+autocmd FileType rust noremap <leader>b :Dispatch cargo build<CR>
+autocmd FileType rust noremap <leader>r :Dispatch cargo run<CR>
+autocmd FileType rust noremap <leader>t :Dispatch cargo test<CR>
+autocmd FileType rust noremap <leader>c :Dispatch cargo check<CR>
 
 " Ensure ale temp files persist when sleeping
 set dir=~/tmp
