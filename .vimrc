@@ -64,6 +64,7 @@ let mapleader = "\<Space>"
 noremap <leader>w :NERDTreeToggle<CR>
 noremap <leader>e :BufExplorer<CR>
 noremap <leader>a :Copen<CR>
+noremap <leader>d :ALEDetail<CR>
 
 autocmd FileType rust noremap <leader>b :Dispatch cargo build<CR>
 autocmd FileType rust noremap <leader>r :Dispatch cargo run<CR>
