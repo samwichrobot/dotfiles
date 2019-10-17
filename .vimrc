@@ -10,6 +10,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-dispatch'
+Plug 'vim-airline/vim-airline'
+Plug 'ervandew/supertab'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -24,6 +26,9 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Rust
 Plug 'rust-lang/rust.vim'
+
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
