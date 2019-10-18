@@ -35,6 +35,12 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'kien/rainbow_parentheses.vim'
 
+" Racket
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'guns/vim-sexp'
+Plug 'wlangstroth/vim-racket'
+Plug 'bhurlow/vim-parinfer'
+
 call plug#end()
 
 set bg=dark
