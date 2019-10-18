@@ -10,7 +10,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-dispatch'
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 Plug 'ervandew/supertab'
 
 " Comments
@@ -29,6 +30,10 @@ Plug 'rust-lang/rust.vim'
 
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-eunuch'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'kien/rainbow_parentheses.vim'
 
 call plug#end()
 
@@ -63,6 +68,10 @@ let g:ale_fixers = {
 \   'rust': ['rustfmt'],
 \}
 
+let g:ale_linters = {
+\   'rust': ['rustc', 'cargo'],
+\}
+
 " Change mappings.
 let mapleader = "\<Space>"
 
@@ -78,3 +87,24 @@ autocmd FileType rust noremap <leader>c :Dispatch cargo check<CR>
 
 " Ensure ale temp files persist when sleeping
 set dir=~/tmp
+
+let g:ale_rust_rustc_options = ""
+let g:indent_guides_enable_on_vim_startup = 1
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+set showtabline=2
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+let g:lightline#bufferline#filename_modifier = ':t'
+
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
