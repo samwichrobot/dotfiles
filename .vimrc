@@ -2,38 +2,40 @@ call plug#begin('~/.vim/plugs')
 
 " Themes
 Plug 'morhetz/gruvbox'
+Plug 'rakr/vim-one'
 
 " Git
 Plug 'tpope/vim-fugitive'
 
 " Navigation
-Plug 'jlanzarotta/bufexplorer'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-dispatch'
 Plug 'itchyny/lightline.vim'
+Plug 'jlanzarotta/bufexplorer'
 Plug 'mengelbrecht/lightline-bufferline'
+Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
+
+" Misc
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch'
 
 " Comments
 Plug 'tpope/vim-commentary'
 
 " Formatting
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-sensible'
 Plug 'dense-analysis/ale'
+Plug 'yggdroot/indentline'
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Rust
 Plug 'rust-lang/rust.vim'
-
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-eunuch'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'kien/rainbow_parentheses.vim'
 
 " Racket
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
@@ -44,7 +46,7 @@ Plug 'bhurlow/vim-parinfer'
 call plug#end()
 
 set bg=dark
-colorscheme gruvbox
+colorscheme one
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -74,10 +76,6 @@ let g:ale_fixers = {
 \   'rust': ['rustfmt'],
 \}
 
-let g:ale_linters = {
-\   'rust': ['rustc', 'cargo'],
-\}
-
 " Change mappings.
 let mapleader = "\<Space>"
 
@@ -95,7 +93,6 @@ autocmd FileType rust noremap <leader>c :Dispatch cargo check<CR>
 set dir=~/tmp
 
 let g:ale_rust_rustc_options = ""
-let g:indent_guides_enable_on_vim_startup = 1
 
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
@@ -108,7 +105,7 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
 
-let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [[]]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 let g:lightline#bufferline#filename_modifier = ':t'
