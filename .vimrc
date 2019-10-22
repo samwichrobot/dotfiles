@@ -13,6 +13,7 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
+Plug 'MattesGroeger/vim-bookmarks'
 
 " Misc
 Plug 'ntpeters/vim-better-whitespace'
@@ -45,7 +46,7 @@ Plug 'bhurlow/vim-parinfer'
 
 call plug#end()
 
-set bg=dark
+set bg=light
 colorscheme one
 
 if &term =~ '256color'
@@ -54,6 +55,7 @@ if &term =~ '256color'
   set t_ut=
 endif
 
+set showtabline=0
 set nocompatible
 set completeopt=menu,longest
 set tabstop=2
@@ -99,13 +101,10 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-set showtabline=2
-
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'one',
       \ }
 
-let g:lightline.tabline          = {'left': [['buffers']], 'right': [[]]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 let g:lightline#bufferline#filename_modifier = ':t'
