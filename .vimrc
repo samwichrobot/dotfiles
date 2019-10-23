@@ -8,17 +8,18 @@ Plug 'rakr/vim-one'
 Plug 'tpope/vim-fugitive'
 
 " Navigation
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'ervandew/supertab'
 Plug 'itchyny/lightline.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'scrooloose/nerdtree'
-Plug 'ervandew/supertab'
-Plug 'MattesGroeger/vim-bookmarks'
 
 " Misc
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
+Plug 'davidoc/taskpaper.vim'
 
 " Comments
 Plug 'tpope/vim-commentary'
