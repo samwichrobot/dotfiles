@@ -47,7 +47,7 @@ Plug 'bhurlow/vim-parinfer'
 
 call plug#end()
 
-set bg=light
+set bg=dark
 colorscheme one
 
 if &term =~ '256color'
@@ -91,11 +91,14 @@ autocmd FileType rust noremap <leader>b :Dispatch cargo build<CR>
 autocmd FileType rust noremap <leader>r :Dispatch cargo run<CR>
 autocmd FileType rust noremap <leader>t :Dispatch cargo test<CR>
 autocmd FileType rust noremap <leader>c :Dispatch cargo check<CR>
+autocmd FileType rust noremap <leader>f :RustTest<CR>
+
 
 " Ensure ale temp files persist when sleeping
 set dir=~/tmp
 
 let g:ale_rust_rustc_options = ""
+let g:ale_rust_cargo_check_tests = 1
 
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
