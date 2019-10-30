@@ -2,7 +2,7 @@ call plug#begin('~/.vim/plugs')
 
 " Themes
 Plug 'morhetz/gruvbox'
-Plug 'rakr/vim-one'
+Plug 'rafi/awesome-vim-colorschemes'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -39,16 +39,10 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Rust
 Plug 'rust-lang/rust.vim'
 
-" Racket
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'guns/vim-sexp'
-Plug 'wlangstroth/vim-racket'
-Plug 'bhurlow/vim-parinfer'
-
 call plug#end()
 
 set bg=dark
-colorscheme one
+colorscheme gotham256
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -106,7 +100,7 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'wombat',
       \ }
 
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}

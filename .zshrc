@@ -26,3 +26,5 @@ source ~/.cargo/env
 
 export TMUX_TMPDIR=$HOME/tmp
 export TMPDIR=$HOME/tmp
+
+source $HOME/.cargo/env
