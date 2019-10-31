@@ -2,7 +2,6 @@ call plug#begin('~/.vim/plugs')
 
 " Themes
 Plug 'morhetz/gruvbox'
-Plug 'rafi/awesome-vim-colorschemes'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -42,7 +41,7 @@ Plug 'rust-lang/rust.vim'
 call plug#end()
 
 set bg=dark
-colorscheme gotham256
+colorscheme gruvbox
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -86,6 +85,7 @@ autocmd FileType rust noremap <leader>r :Dispatch cargo run<CR>
 autocmd FileType rust noremap <leader>t :Dispatch cargo test<CR>
 autocmd FileType rust noremap <leader>c :Dispatch cargo check<CR>
 autocmd FileType rust noremap <leader>f :RustTest<CR>
+autocmd FileType rust noremap <leader>j :BookmarkToggle<CR>
 
 
 " Ensure ale temp files persist when sleeping
