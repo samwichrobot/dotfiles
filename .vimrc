@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugs')
 
 " Themes
 Plug 'morhetz/gruvbox'
+Plug 'altercation/vim-colors-solarized'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -47,7 +48,7 @@ Plug 'prabirshrestha/vim-lsp'
 call plug#end()
 
 set bg=dark
-colorscheme gruvbox
+colorscheme solarized
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
