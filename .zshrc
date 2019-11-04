@@ -1,7 +1,7 @@
 source $HOME/.aliases
 
 plugins=(git node npm tmux docker github docker-compose docker-machine extract dotenv man copyfile kubectl cargo rust)
-ZSH_THEME="cloud"
+ZSH_THEME="ys"
 
 export PATH=$PATH:node_modules/.bin
 export PATH="$PATH:$HOME/bin"
