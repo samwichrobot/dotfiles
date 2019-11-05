@@ -48,7 +48,7 @@ Plug 'prabirshrestha/vim-lsp'
 call plug#end()
 
 set bg=dark
-colorscheme solarized
+colorscheme gruvbox
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
