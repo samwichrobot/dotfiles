@@ -2,7 +2,6 @@ call plug#begin('~/.vim/plugs')
 
 " Themes
 Plug 'morhetz/gruvbox'
-Plug 'altercation/vim-colors-solarized'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -38,12 +37,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Rust
 Plug 'rust-lang/rust.vim'
-
-" LSP
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
 
 call plug#end()
 
@@ -100,6 +93,7 @@ set dir=~/tmp
 
 let g:ale_rust_rustc_options = ""
 let g:ale_rust_cargo_check_tests = 1
+let g:ale_rust_cargo_use_clippy = 1
 
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
@@ -119,19 +113,6 @@ autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-
-autocmd FileType rust nmap gd <plug>(lsp-definition)
-autocmd FileType rust nmap K <plug>(lsp-hover)
-autocmd FileType rust nmap <F2> <plug>(lsp-rename)
-
-if executable('rls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
-        \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
-        \ 'whitelist': ['rust'],
-        \ })
-endif
 
 " Local settings
 if filereadable(expand('~/.vimrc.local'))
