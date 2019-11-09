@@ -22,3 +22,5 @@ if test -f "$FILE"; then
 fi
 
 source $HOME/.cargo/env
+
+export TERM="xterm-256color"

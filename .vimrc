@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugs')
 
 " Themes
-Plug 'morhetz/gruvbox'
+Plug 'Rigellute/rigel'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -40,10 +40,19 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Rust
 Plug 'rust-lang/rust.vim'
 
+
+" LSP
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+
 call plug#end()
 
 set bg=dark
-colorscheme gruvbox
+colorscheme rigel
+set termguicolors
+syntax enable
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -72,6 +81,8 @@ let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'rust': ['rustfmt'],
+\   'c': ['clang-format'],
+\   'cpp': ['clang-format'],
 \}
 
 " Change mappings.
@@ -103,7 +114,7 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'rigel',
       \ }
 
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
@@ -150,3 +161,32 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+autocmd FileType c nmap gd <plug>(lsp-definition)
+autocmd FileType c nmap K <plug>(lsp-hover)
+autocmd FileType c nmap <F2> <plug>(lsp-rename)
+
+autocmd FileType cpp nmap gd <plug>(lsp-definition)
+autocmd FileType cpp nmap K <plug>(lsp-hover)
+autocmd FileType cpp nmap <F2> <plug>(lsp-rename)
+
+autocmd FileType rust nmap gd <plug>(lsp-definition)
+autocmd FileType rust nmap K <plug>(lsp-hover)
+autocmd FileType rust nmap <F2> <plug>(lsp-rename)
+
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd', '-background-index']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif
+
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+        \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
