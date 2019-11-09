@@ -1,5 +1,3 @@
-source $HOME/.aliases
-
 plugins=(git node npm tmux docker github docker-compose docker-machine extract dotenv man copyfile kubectl cargo rust)
 ZSH_THEME="ys"
 
@@ -15,6 +13,7 @@ export TERM=xterm-256color
 
 
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
+source $HOME/.aliases
 
 # local config
 FILE=~/.zshrc.local

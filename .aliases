@@ -4,3 +4,6 @@ alias gpr="git pull --rebase"
 alias weather-oakland='curl -4 http://wttr.in/Oakland'
 alias weather-sf='curl -4 http://wttr.in/SanFrancisco'
 alias moon='curl -4 http://wttr.in/Moon'
+
+alias ls='exa --git'
+alias cat='bat'
