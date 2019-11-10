@@ -1,5 +1,7 @@
 alias eotl="telnet eotl.org 2010"
+
 alias gpr="git pull --rebase"
+alias gca="git commit --amend -CHEAD"
 
 alias weather-oakland='curl -4 http://wttr.in/Oakland'
 alias weather-sf='curl -4 http://wttr.in/SanFrancisco'
