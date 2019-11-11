@@ -76,13 +76,15 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 let g:NERDTreeWinPos = "right"
 
-let g:ale_completion_enabled = 0
+let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'rust': ['rustfmt'],
-\   'c': ['clang-format'],
-\   'cpp': ['clang-format'],
+\}
+
+let g:ale_linters = {
+\   'rust': ['rls'],
 \}
 
 " Change mappings.
@@ -162,31 +164,11 @@ let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-autocmd FileType c nmap gd <plug>(lsp-definition)
-autocmd FileType c nmap K <plug>(lsp-hover)
-autocmd FileType c nmap <F2> <plug>(lsp-rename)
+let g:ale_rust_rls_config = {
+      \   'rust': {
+      \     'clippy_preference': 'on'
+      \   }
+      \ }
 
-autocmd FileType cpp nmap gd <plug>(lsp-definition)
-autocmd FileType cpp nmap K <plug>(lsp-hover)
-autocmd FileType cpp nmap <F2> <plug>(lsp-rename)
-
-autocmd FileType rust nmap gd <plug>(lsp-definition)
-autocmd FileType rust nmap K <plug>(lsp-hover)
-autocmd FileType rust nmap <F2> <plug>(lsp-rename)
-
-if executable('clangd')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd', '-background-index']},
-        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-        \ })
-endif
-
-if executable('rls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
-        \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
-        \ 'whitelist': ['rust'],
-        \ })
-endif
+autocmd FileType rust nmap gd <Plug>(ale_go_to_definition)
+autocmd FileType rust nmap <F2> <Plug>(ale_rename)
