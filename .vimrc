@@ -15,6 +15,7 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'terryma/vim-multiple-cursors'
 
 " Misc
 Plug 'ntpeters/vim-better-whitespace'
