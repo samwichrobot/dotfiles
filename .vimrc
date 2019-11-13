@@ -91,7 +91,7 @@ let mapleader = "\<Space>"
 
 noremap <leader>w :NERDTreeToggle<CR>
 noremap <leader>e :BufExplorer<CR>
-noremap <leader>a :Copen<CR>
+noremap <leader>a :copen<CR>
 noremap <leader>d :ALEDetail<CR>
 
 autocmd FileType rust noremap <leader>b :Dispatch cargo build<CR>
@@ -108,6 +108,7 @@ set dir=~/tmp
 let g:ale_rust_rustc_options = ""
 let g:ale_rust_cargo_check_tests = 1
 let g:ale_rust_cargo_use_clippy = 1
+let g:ale_set_quickfix = 1
 
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
