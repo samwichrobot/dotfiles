@@ -41,12 +41,10 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Rust
 Plug 'rust-lang/rust.vim'
 
-
-" LSP
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
+" Local Plugs
+if filereadable(expand('~/.plugs.local'))
+  source ~/.plugs.local
+endif
 
 call plug#end()
 
@@ -68,7 +66,7 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
-set visualbell
+set belloff=all
 set shell=/bin/zsh
 set noswapfile
 
@@ -130,11 +128,6 @@ autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 
-" Local settings
-if filereadable(expand('~/.vimrc.local'))
-  source ~/.vimrc.local
-endif
-
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "m",
     \ "Staged"    : "a",
@@ -173,3 +166,9 @@ let g:ale_rust_rls_config = {
 
 autocmd FileType rust nmap gd <Plug>(ale_go_to_definition)
 autocmd FileType rust nmap <F2> <Plug>(ale_rename)
+autocmd FileType rust nmap K <Plug>(ale_hover)
+
+" Local settings
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
