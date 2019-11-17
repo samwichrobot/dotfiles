@@ -150,6 +150,8 @@ noremap <leader>e :BufExplorer<CR>
 noremap <leader>a :copen<CR>
 noremap <leader>d :ALEDetail<CR>
 noremap <leader>j :BookmarkToggle<CR>
+noremap <leader>n :BookmarkAnnotate<CR>
+noremap <leader>l :BookmarkShowAll<CR>
 
 autocmd FileType rust nmap gd <Plug>(ale_go_to_definition)
 autocmd FileType rust nmap <F2> <Plug>(ale_rename)
