@@ -1,7 +1,8 @@
 call plug#begin('~/.vim/plugs')
 
 " Themes
-Plug 'Rigellute/rigel'
+Plug 'morhetz/gruvbox'
+Plug 'shinchu/lightline-gruvbox.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -55,7 +56,7 @@ if &term =~ '256color'
 endif
 
 syntax enable
-colorscheme rigel
+colorscheme gruvbox
 set bg=dark
 set termguicolors
 set showtabline=0
@@ -103,7 +104,7 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 let g:lightline = {
-      \ 'colorscheme': 'rigel',
+      \ 'colorscheme': 'gruvbox',
       \ }
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
