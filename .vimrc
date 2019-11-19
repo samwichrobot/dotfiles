@@ -2,38 +2,44 @@ call plug#begin('~/.vim/plugs')
 
 " Themes
 Plug 'morhetz/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
 
 " Git
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Navigation
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'ervandew/supertab'
-Plug 'itchyny/lightline.vim'
-Plug 'jlanzarotta/bufexplorer'
-Plug 'mengelbrecht/lightline-bufferline'
-Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
+" Editing
 Plug 'terryma/vim-multiple-cursors'
 
-" Misc
-Plug 'ntpeters/vim-better-whitespace'
+" Command Line
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
+
+" Navigation
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'scrooloose/nerdtree'
+
+" lightline
+Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
+
+" Misc
+Plug 'ervandew/supertab'
 Plug 'davidoc/taskpaper.vim'
 
 " Comments
 Plug 'tpope/vim-commentary'
 
 " Formatting
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-sensible'
 Plug 'dense-analysis/ale'
+Plug 'jiangmiao/auto-pairs'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
 Plug 'yggdroot/indentline'
 
 " Go
@@ -104,11 +110,9 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'wombat',
       \ }
-let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-let g:lightline.component_type   = {'buffers': 'tabsel'}
-let g:lightline#bufferline#filename_modifier = ':t'
+
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 " Supertab
@@ -167,3 +171,26 @@ autocmd FileType rust noremap <leader>f :RustTest<CR>
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
+
+let g:lightline = {}
+
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+
+let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
+
+let g:lightline#ale#indicator_checking = "\uf110"
+let g:lightline#ale#indicator_warnings = "\uf071"
+let g:lightline#ale#indicator_errors = "\uf05e"
+let g:lightline#ale#indicator_ok = "\uf00c"
