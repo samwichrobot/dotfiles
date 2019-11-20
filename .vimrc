@@ -48,6 +48,12 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Rust
 Plug 'rust-lang/rust.vim'
 
+" Lsp
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
 " Local Plugs
 if filereadable(expand('~/.plugs.local'))
   source ~/.plugs.local
@@ -95,6 +101,8 @@ let g:ale_rust_rls_config = {
       \ }
 let g:ale_linters = {
 \   'rust': ['rls'],
+\   'c':   ['clang', 'clangd', 'clangtidy'],
+\   'cpp': ['clang', 'clangd', 'clangtidy'],
 \}
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
@@ -102,6 +110,8 @@ let g:ale_lint_on_save = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'rust': ['rustfmt'],
+\   'c': ['clang-format'],
+\   'cpp': ['clang-format'],
 \}
 
 au VimEnter * RainbowParenthesesToggle
@@ -194,3 +204,18 @@ let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
+
+if executable('clangd')
+    augroup lsp_clangd
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'clangd',
+                    \ 'cmd': {server_info->['clangd']},
+                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                    \ })
+        autocmd FileType c setlocal omnifunc=lsp#complete
+        autocmd FileType cpp setlocal omnifunc=lsp#complete
+        autocmd FileType objc setlocal omnifunc=lsp#complete
+        autocmd FileType objcpp setlocal omnifunc=lsp#complete
+    augroup end
+endif
