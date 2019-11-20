@@ -219,3 +219,5 @@ if executable('clangd')
         autocmd FileType objcpp setlocal omnifunc=lsp#complete
     augroup end
 endif
+
+let g:lsp_signature_help_enabled = v:false
