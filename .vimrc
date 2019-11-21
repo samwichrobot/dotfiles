@@ -205,10 +205,10 @@ let g:lightline.component_type = {
 
 let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
 
-let g:lightline#ale#indicator_checking = "?"
-let g:lightline#ale#indicator_warnings = "!"
-let g:lightline#ale#indicator_errors = "x"
-let g:lightline#ale#indicator_ok = ""
+let g:lightline#ale#indicator_checking = " ??? "
+let g:lightline#ale#indicator_warnings = " WARN "
+let g:lightline#ale#indicator_errors = " ERR "
+let g:lightline#ale#indicator_ok = " OK "
 
 if executable('clangd')
     augroup lsp_clangd
