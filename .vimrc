@@ -44,6 +44,9 @@ Plug 'yggdroot/indentline'
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sebdah/vim-delve'
+Plug 'Shougo/vimshell.vim'
+Plug 'Shougo/vimproc.vim'
 
 " Rust
 Plug 'rust-lang/rust.vim'
@@ -103,6 +106,7 @@ let g:ale_linters = {
 \   'rust': ['rls'],
 \   'c':   ['clang', 'clangd', 'clangtidy'],
 \   'cpp': ['clang', 'clangd', 'clangtidy'],
+\   'go': ['gopls', 'golint'],
 \}
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
@@ -112,6 +116,7 @@ let g:ale_fixers = {
 \   'rust': ['rustfmt'],
 \   'c': ['clang-format'],
 \   'cpp': ['clang-format'],
+\   'go': ['goimports'],
 \}
 
 au VimEnter * RainbowParenthesesToggle
@@ -200,10 +205,10 @@ let g:lightline.component_type = {
 
 let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
 
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_warnings = "\uf071"
-let g:lightline#ale#indicator_errors = "\uf05e"
-let g:lightline#ale#indicator_ok = "\uf00c"
+let g:lightline#ale#indicator_checking = "?"
+let g:lightline#ale#indicator_warnings = "!"
+let g:lightline#ale#indicator_errors = "x"
+let g:lightline#ale#indicator_ok = ""
 
 if executable('clangd')
     augroup lsp_clangd
