@@ -57,6 +57,10 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
+" Ruby
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-endwise'
+
 " Local Plugs
 if filereadable(expand('~/.plugs.local'))
   source ~/.plugs.local
@@ -107,6 +111,7 @@ let g:ale_linters = {
 \   'c':   ['clang', 'clangd', 'clangtidy'],
 \   'cpp': ['clang', 'clangd', 'clangtidy'],
 \   'go': ['gopls', 'golint'],
+\   'ruby': ['ruby', 'solargraph', 'rubocop'],
 \}
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
@@ -117,6 +122,7 @@ let g:ale_fixers = {
 \   'c': ['clang-format'],
 \   'cpp': ['clang-format'],
 \   'go': ['goimports'],
+\   'ruby': ['rubocop'],
 \}
 
 au VimEnter * RainbowParenthesesToggle
@@ -223,6 +229,18 @@ if executable('clangd')
         autocmd FileType objc setlocal omnifunc=lsp#complete
         autocmd FileType objcpp setlocal omnifunc=lsp#complete
     augroup end
+endif
+
+if executable('solargraph')
+    " gem install solargraph
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'solargraph',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+        \ 'initialization_options': {"diagnostics": "true"},
+        \ 'whitelist': ['ruby'],
+        \ })
+
+    autocmd FileType ruby setlocal omnifunc=lsp#complete
 endif
 
 let g:lsp_signature_help_enabled = v:false
