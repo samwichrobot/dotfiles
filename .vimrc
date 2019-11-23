@@ -51,16 +51,6 @@ Plug 'Shougo/vimproc.vim'
 " Rust
 Plug 'rust-lang/rust.vim'
 
-" Lsp
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
-" Ruby
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-endwise'
-
 " Local Plugs
 if filereadable(expand('~/.plugs.local'))
   source ~/.plugs.local
@@ -108,10 +98,7 @@ let g:ale_rust_rls_config = {
       \ }
 let g:ale_linters = {
 \   'rust': ['rls'],
-\   'c':   ['clang', 'clangd', 'clangtidy'],
-\   'cpp': ['clang', 'clangd', 'clangtidy'],
 \   'go': ['gopls', 'golint'],
-\   'ruby': ['ruby', 'solargraph', 'rubocop'],
 \}
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
@@ -119,10 +106,7 @@ let g:ale_lint_on_save = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'rust': ['rustfmt'],
-\   'c': ['clang-format'],
-\   'cpp': ['clang-format'],
 \   'go': ['goimports'],
-\   'ruby': ['rubocop'],
 \}
 
 au VimEnter * RainbowParenthesesToggle
@@ -211,36 +195,7 @@ let g:lightline.component_type = {
 
 let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
 
-let g:lightline#ale#indicator_checking = " ??? "
-let g:lightline#ale#indicator_warnings = " WARN "
-let g:lightline#ale#indicator_errors = " ERR "
-let g:lightline#ale#indicator_ok = " OK "
-
-if executable('clangd')
-    augroup lsp_clangd
-        autocmd!
-        autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'clangd',
-                    \ 'cmd': {server_info->['clangd']},
-                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-                    \ })
-        autocmd FileType c setlocal omnifunc=lsp#complete
-        autocmd FileType cpp setlocal omnifunc=lsp#complete
-        autocmd FileType objc setlocal omnifunc=lsp#complete
-        autocmd FileType objcpp setlocal omnifunc=lsp#complete
-    augroup end
-endif
-
-if executable('solargraph')
-    " gem install solargraph
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'solargraph',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-        \ 'initialization_options': {"diagnostics": "true"},
-        \ 'whitelist': ['ruby'],
-        \ })
-
-    autocmd FileType ruby setlocal omnifunc=lsp#complete
-endif
-
-let g:lsp_signature_help_enabled = v:false
+let g:lightline#ale#indicator_checking = "???"
+let g:lightline#ale#indicator_warnings = "WARN "
+let g:lightline#ale#indicator_errors = "ERR "
+let g:lightline#ale#indicator_ok = "OK"
