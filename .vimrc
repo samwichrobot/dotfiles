@@ -199,3 +199,17 @@ let g:lightline#ale#indicator_checking = "???"
 let g:lightline#ale#indicator_warnings = "WARN "
 let g:lightline#ale#indicator_errors = "ERR "
 let g:lightline#ale#indicator_ok = "OK"
+
+if has("gui_running")
+  if has("gui_macvim")
+    set guifont=Fira\ Code:h15
+  else
+    set guifont=Fira\ Code\ 15
+  endif
+  set guioptions-=m  "remove menu bar
+  set guioptions-=T  "remove toolbar
+  set guioptions-=r  "remove right-hand scroll bar
+  set guioptions-=L  "remove left-hand scroll bar
+  map <silent> <F11>
+\    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+endif
