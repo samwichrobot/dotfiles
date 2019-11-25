@@ -205,6 +205,7 @@ if has("gui_running")
     set guifont=Fira\ Code:h15
   else
     set guifont=Fira\ Code\ 15
+    set clipboard=unnamedplus
   endif
   set guioptions-=m  "remove menu bar
   set guioptions-=T  "remove toolbar
@@ -213,5 +214,3 @@ if has("gui_running")
   map <silent> <F11>
 \    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 endif
-
-set clipboard=unnamedplus
