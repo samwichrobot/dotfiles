@@ -213,3 +213,5 @@ if has("gui_running")
   map <silent> <F11>
 \    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 endif
+
+set clipboard=unnamedplus
