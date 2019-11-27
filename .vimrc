@@ -4,7 +4,6 @@ call plug#begin('~/.vim/plugs')
 Plug 'morhetz/gruvbox'
 
 " Git
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -66,10 +65,8 @@ endif
 
 syntax enable
 colorscheme gruvbox
+set number
 set bg=dark
-set termguicolors
-set showtabline=0
-set nocompatible
 set completeopt=menu,longest
 set tabstop=2
 set softtabstop=2
@@ -83,14 +80,12 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 " Ensure ale temp files persist when sleeping
 set dir=~/tmp
 
-
 " Ggrep pops up quick fix window
 autocmd QuickFixCmdPost *grep* cwindow
 
 let g:ale_rust_rustc_options = ""
 let g:ale_rust_cargo_check_tests = 1
 let g:ale_rust_cargo_use_clippy = 1
-let g:ale_set_quickfix = 1
 let g:ale_rust_rls_config = {
       \   'rust': {
       \     'clippy_preference': 'on'
@@ -199,18 +194,3 @@ let g:lightline#ale#indicator_checking = "???"
 let g:lightline#ale#indicator_warnings = "WARN "
 let g:lightline#ale#indicator_errors = "ERR "
 let g:lightline#ale#indicator_ok = "OK"
-
-if has("gui_running")
-  if has("gui_macvim")
-    set guifont=Fira\ Code:h15
-  else
-    set guifont=Fira\ Code\ 15
-    set clipboard=unnamedplus
-  endif
-  set guioptions-=m  "remove menu bar
-  set guioptions-=T  "remove toolbar
-  set guioptions-=r  "remove right-hand scroll bar
-  set guioptions-=L  "remove left-hand scroll bar
-  map <silent> <F11>
-\    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
-endif
