@@ -5,7 +5,6 @@ Plug 'morhetz/gruvbox'
 
 " Git
 Plug 'tpope/vim-fugitive'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Editing
 Plug 'terryma/vim-multiple-cursors'
@@ -93,7 +92,7 @@ let g:ale_rust_rls_config = {
       \ }
 let g:ale_linters = {
 \   'rust': ['rls'],
-\   'go': ['gopls', 'golint'],
+\   'go': ['gobuild', 'golint', 'gometalinter'],
 \}
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
@@ -120,18 +119,6 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 
 let g:NERDTreeWinPos = "right"
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "m",
-    \ "Staged"    : "a",
-    \ "Untracked" : "u",
-    \ "Renamed"   : "r",
-    \ "Unmerged"  : ">",
-    \ "Deleted"   : "d",
-    \ "Dirty"     : "c",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : 'i',
-    \ "Unknown"   : "?"
-    \ }
 let g:NERDTreeShowIgnoredStatus = 1
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
