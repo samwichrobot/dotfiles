@@ -46,9 +46,6 @@ Plug 'sebdah/vim-delve'
 Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim'
 
-" Rust
-Plug 'rust-lang/rust.vim'
-
 " Local Plugs
 if filereadable(expand('~/.plugs.local'))
   source ~/.plugs.local
@@ -82,16 +79,7 @@ set dir=~/tmp
 " Ggrep pops up quick fix window
 autocmd QuickFixCmdPost *grep* cwindow
 
-let g:ale_rust_rustc_options = ""
-let g:ale_rust_cargo_check_tests = 1
-let g:ale_rust_cargo_use_clippy = 1
-let g:ale_rust_rls_config = {
-      \   'rust': {
-      \     'clippy_preference': 'on'
-      \   }
-      \ }
 let g:ale_linters = {
-\   'rust': ['rls'],
 \   'go': ['gobuild', 'golint', 'gometalinter'],
 \}
 let g:ale_completion_enabled = 1
@@ -99,7 +87,6 @@ let g:ale_fix_on_save = 1
 let g:ale_lint_on_save = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'rust': ['rustfmt'],
 \   'go': ['goimports'],
 \}
 
@@ -146,20 +133,6 @@ noremap <leader>j :BookmarkToggle<CR>
 noremap <leader>n :BookmarkAnnotate<CR>
 noremap <leader>l :BookmarkShowAll<CR>
 
-autocmd FileType rust nmap gd <Plug>(ale_go_to_definition)
-autocmd FileType rust nmap <F2> <Plug>(ale_rename)
-autocmd FileType rust nmap K <Plug>(ale_hover)
-autocmd FileType rust noremap <leader>b :Dispatch cargo build<CR>
-autocmd FileType rust noremap <leader>r :Dispatch cargo run<CR>
-autocmd FileType rust noremap <leader>t :Dispatch cargo test<CR>
-autocmd FileType rust noremap <leader>c :Dispatch cargo check<CR>
-autocmd FileType rust noremap <leader>f :RustTest<CR>
-
-" Local settings
-if filereadable(expand('~/.vimrc.local'))
-  source ~/.vimrc.local
-endif
-
 let g:lightline = {}
 
 let g:lightline.component_expand = {
@@ -182,3 +155,8 @@ let g:lightline#ale#indicator_checking = "???"
 let g:lightline#ale#indicator_warnings = "WARN "
 let g:lightline#ale#indicator_errors = "ERR "
 let g:lightline#ale#indicator_ok = "OK"
+
+" Local settings
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
