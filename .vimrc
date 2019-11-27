@@ -153,6 +153,7 @@ let mapleader = "\<Space>"
 noremap <leader>w :NERDTreeToggle<CR>
 noremap <leader>e :BufExplorer<CR>
 noremap <leader>a :copen<CR>
+noremap <leader>o :lopen<CR>
 noremap <leader>d :ALEDetail<CR>
 noremap <leader>j :BookmarkToggle<CR>
 noremap <leader>n :BookmarkAnnotate<CR>
