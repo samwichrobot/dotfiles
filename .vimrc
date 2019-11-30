@@ -22,10 +22,12 @@ Plug 'scrooloose/nerdtree'
 " lightline
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
+Plug 'shinchu/lightline-gruvbox.vim'
 
 " Misc
 Plug 'ervandew/supertab'
 Plug 'davidoc/taskpaper.vim'
+Plug 'tpope/vim-sensible'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -33,18 +35,9 @@ Plug 'tpope/vim-commentary'
 " Formatting
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'yggdroot/indentline'
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'sebdah/vim-delve'
-Plug 'Shougo/vimshell.vim'
-Plug 'Shougo/vimproc.vim'
 
 " Local Plugs
 if filereadable(expand('~/.plugs.local'))
@@ -81,20 +74,13 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_save = 1
+let g:ale_linters = {}
+let g:ale_linters.go = ['gobuild', 'golint', 'gometalinter', 'govet']
+
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
-
 let g:ale_fixers.go = ['goimports']
-
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
 
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
@@ -130,7 +116,10 @@ noremap <leader>j :BookmarkToggle<CR>
 noremap <leader>n :BookmarkAnnotate<CR>
 noremap <leader>l :BookmarkShowAll<CR>
 
-let g:lightline = {}
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ }
+
 
 let g:lightline.component_expand = {
       \  'linter_checking': 'lightline#ale#checking',
