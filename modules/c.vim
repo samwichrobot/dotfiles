@@ -11,3 +11,6 @@ let g:ale_linters.c = ['clang', 'clangtidy', 'clangd']
 
 let g:ale_fixers.cpp = ['clang-format']
 let g:ale_linters.cpp = ['clang', 'clangtidy', 'clangd']
+
+autocmd FileType c map <leader>y :call CurtineIncSw()<CR>
+autocmd FileType cpp map <leader>y :call CurtineIncSw()<CR>

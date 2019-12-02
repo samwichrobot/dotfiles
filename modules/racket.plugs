@@ -1,6 +1,0 @@
-Plug 'wlangstroth/vim-racket'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'bthesorceror/vim-parinfer'
