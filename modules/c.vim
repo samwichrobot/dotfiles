@@ -14,3 +14,7 @@ let g:ale_linters.cpp = ['clang', 'clangtidy', 'clangd']
 
 autocmd FileType c map <leader>y :call CurtineIncSw()<CR>
 autocmd FileType cpp map <leader>y :call CurtineIncSw()<CR>
+
+autocmd FileType c nmap gd <plug>(lsp-definition)
+autocmd FileType c nmap K <plug>(lsp-hover)
+autocmd FileType c nmap <F2> <plug>(lsp-rename)
