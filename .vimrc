@@ -36,9 +36,6 @@ Plug 'tpope/vim-commentary'
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 
-" Go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
 " Local Plugs
 if filereadable(expand('~/.plugs.local'))
   source ~/.plugs.local
@@ -75,12 +72,10 @@ autocmd QuickFixCmdPost *grep* cwindow
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_save = 1
 let g:ale_linters = {}
-let g:ale_linters.go = ['gobuild', 'golint', 'gometalinter', 'govet']
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
-let g:ale_fixers.go = ['goimports']
 
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
@@ -119,7 +114,6 @@ noremap <leader>l :BookmarkShowAll<CR>
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ }
-
 
 let g:lightline.component_expand = {
       \  'linter_checking': 'lightline#ale#checking',
