@@ -51,6 +51,7 @@ endif
 
 syntax enable
 colorscheme gruvbox
+
 set number
 set bg=dark
 set completeopt=menu,longest
