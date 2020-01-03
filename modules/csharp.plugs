@@ -1,0 +1,2 @@
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'OmniSharp/omnisharp-vim'

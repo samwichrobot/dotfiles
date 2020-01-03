@@ -7,3 +7,5 @@ alias weather-oakland='curl -4 http://wttr.in/Oakland'
 alias weather-sf='curl -4 http://wttr.in/SanFrancisco'
 alias moon='curl -4 http://wttr.in/Moon'
 
+alias cat=bat
+alias ls=exa --git

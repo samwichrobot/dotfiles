@@ -1,3 +1,5 @@
+let g:ale_completion_enabled = 1
+
 call plug#begin('~/.vim/plugs')
 
 " Themes
