@@ -1,15 +1,10 @@
-let g:ale_completion_enabled = 1
-
 call plug#begin('~/.vim/plugs')
 
 " Themes
-Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Git
 Plug 'tpope/vim-fugitive'
-
-" Editing
-Plug 'terryma/vim-multiple-cursors'
 
 " Command Line
 Plug 'tpope/vim-dispatch'
@@ -23,13 +18,10 @@ Plug 'scrooloose/nerdtree'
 
 " lightline
 Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
-Plug 'shinchu/lightline-gruvbox.vim'
 
 " Misc
-Plug 'ervandew/supertab'
-Plug 'davidoc/taskpaper.vim'
 Plug 'tpope/vim-sensible'
+Plug 'ervandew/supertab'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -38,10 +30,9 @@ Plug 'tpope/vim-commentary'
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 
-" Local Plugs
-if filereadable(expand('~/.plugs.local'))
-  source ~/.plugs.local
-endif
+" Javascript
+Plug 'pangloss/vim-javascript'
+Plug 'moll/vim-node'
 
 call plug#end()
 
@@ -52,7 +43,7 @@ if &term =~ '256color'
 endif
 
 syntax enable
-colorscheme gruvbox
+colorscheme dracula
 
 set number
 set bg=dark
@@ -115,7 +106,7 @@ noremap <leader>n :BookmarkAnnotate<CR>
 noremap <leader>l :BookmarkShowAll<CR>
 
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'dracula',
       \ }
 
 let g:lightline.component_expand = {
@@ -139,7 +130,6 @@ let g:lightline#ale#indicator_warnings = "WARN "
 let g:lightline#ale#indicator_errors = "ERR "
 let g:lightline#ale#indicator_ok = "OK"
 
-" Local settings
-if filereadable(expand('~/.vimrc.local'))
-  source ~/.vimrc.local
-endif
+" Javascript
+let g:ale_fixers.javascript = ['eslint']
+let g:ale_linters.javascript = ['eslint']
