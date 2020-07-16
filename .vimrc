@@ -22,6 +22,7 @@ Plug 'itchyny/lightline.vim'
 " Misc
 Plug 'tpope/vim-sensible'
 Plug 'ervandew/supertab'
+Plug 'frazrepo/vim-rainbow'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -33,6 +34,12 @@ Plug 'jiangmiao/auto-pairs'
 " Javascript
 Plug 'pangloss/vim-javascript'
 Plug 'moll/vim-node'
+
+" Scheme
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
@@ -57,12 +64,16 @@ set shell=/bin/zsh
 set noswapfile
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
+" rainbow brackets
+let g:rainbow_active = 1
+
 " Ensure ale temp files persist when sleeping
 set dir=~/tmp
 
 " Ggrep pops up quick fix window
 autocmd QuickFixCmdPost *grep* cwindow
 
+" Ale
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_save = 1
 let g:ale_linters = {}
@@ -71,7 +82,8 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
 
-autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+let g:ale_fixers.javascript = ['eslint']
+let g:ale_linters.javascript = ['eslint']
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
@@ -105,6 +117,11 @@ noremap <leader>j :BookmarkToggle<CR>
 noremap <leader>n :BookmarkAnnotate<CR>
 noremap <leader>l :BookmarkShowAll<CR>
 
+" Lightline
+"
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+
+
 let g:lightline = {
       \ 'colorscheme': 'dracula',
       \ }
@@ -130,6 +147,7 @@ let g:lightline#ale#indicator_warnings = "WARN "
 let g:lightline#ale#indicator_errors = "ERR "
 let g:lightline#ale#indicator_ok = "OK"
 
-" Javascript
-let g:ale_fixers.javascript = ['eslint']
-let g:ale_linters.javascript = ['eslint']
+let g:lightline.separator = {
+      \  'right': ' λ ',
+      \'left': ' λ '
+      \}

@@ -1,5 +1,5 @@
 plugins=(git node npm tmux docker github docker-compose docker-machine extract dotenv man copyfile kubectl)
-ZSH_THEME="ys"
+ZSH_THEME="lambda"
 
 export PATH=$PATH:node_modules/.bin
 export PATH="$PATH:$HOME/bin"
