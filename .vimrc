@@ -1,7 +1,8 @@
 call plug#begin('~/.vim/plugs')
 
 " Themes
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'morhetz/gruvbox'
+Plug 'dracula/vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -30,16 +31,15 @@ Plug 'tpope/vim-commentary'
 " Formatting
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
-
-" Javascript
-Plug 'pangloss/vim-javascript'
-Plug 'moll/vim-node'
-
-" Scheme
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'guns/vim-sexp'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+
+Plug 'sheerun/vim-polyglot'
+
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'bhurlow/vim-parinfer'
+Plug 'wlangstroth/vim-racket'
 
 call plug#end()
 
@@ -50,7 +50,7 @@ if &term =~ '256color'
 endif
 
 syntax enable
-colorscheme dracula
+colorscheme gruvbox
 
 set number
 set bg=dark
@@ -70,6 +70,8 @@ let g:rainbow_active = 1
 " Ensure ale temp files persist when sleeping
 set dir=~/tmp
 
+set cmdheight=1
+
 " Ggrep pops up quick fix window
 autocmd QuickFixCmdPost *grep* cwindow
 
@@ -81,9 +83,6 @@ let g:ale_linters = {}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
-
-let g:ale_fixers.javascript = ['eslint']
-let g:ale_linters.javascript = ['eslint']
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
@@ -123,7 +122,7 @@ autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 
 let g:lightline = {
-      \ 'colorscheme': 'dracula',
+      \ 'colorscheme': 'gruvbox',
       \ }
 
 let g:lightline.component_expand = {
@@ -142,12 +141,20 @@ let g:lightline.component_type = {
 
 let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
 
+let g:lightline.separator = {
+  \  'left': ' ❤ ',
+  \  'right': ' ❤ ',
+  \}
+
+let g:lightline.tabline_separator = {
+  \  'left': '',
+  \  'right': '',
+  \}
+
 let g:lightline#ale#indicator_checking = "???"
 let g:lightline#ale#indicator_warnings = "WARN "
 let g:lightline#ale#indicator_errors = "ERR "
 let g:lightline#ale#indicator_ok = "OK"
 
-let g:lightline.separator = {
-      \  'right': ' λ ',
-      \'left': ' λ '
-      \}
+let g:ale_linters.racket = ['raco']
+let g:vim_parinfer_globs = ['*.rkt', '*.scm', '*.ss']
