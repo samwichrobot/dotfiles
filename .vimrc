@@ -2,46 +2,66 @@ call plug#begin('~/.vim/plugs')
 
 " Themes
 Plug 'morhetz/gruvbox'
-Plug 'dracula/vim'
 
-" Git
-Plug 'tpope/vim-fugitive'
+" vim: ft=vim
+" Vim Plugins via Vim Plug
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+if &compatible
+  set nocompatible
+end
 
-" Command Line
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-eunuch'
-
-" Navigation
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jlanzarotta/bufexplorer'
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'scrooloose/nerdtree'
-
-" lightline
-Plug 'itchyny/lightline.vim'
-
-" Misc
-Plug 'tpope/vim-sensible'
+" Make sure you use single quotes
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ervandew/supertab'
-Plug 'frazrepo/vim-rainbow'
-
-" Comments
+Plug 'godlygeek/tabular'
+Plug 'gregsexton/gitv'
+Plug 'hashrocket/vim-hashrocket'
+Plug 'jbranchaud/vim-bdubs'
+Plug 'jgdavey/tslime.vim'
+Plug 'jgdavey/vim-blockle'
+Plug 'jgdavey/vim-railscasts'
+Plug 'jgdavey/vim-turbux'
+Plug 'jgdavey/vim-weefactor'
+Plug 'kana/vim-textobj-user'
+Plug 'leshill/vim-json'
+Plug 'mileszs/ack.vim'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'pangloss/vim-javascript'
+Plug 'rondale-sc/vim-spacejam'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
-
-" Formatting
-Plug 'dense-analysis/ale'
-Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-cucumber'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-ruby/vim-ruby'
+Plug 'vim-scripts/bufexplorer.zip'
+Plug 'vim-scripts/bufkill.vim'
 
-Plug 'sheerun/vim-polyglot'
-
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'bhurlow/vim-parinfer'
-Plug 'wlangstroth/vim-racket'
+" staticly check code and highlight errors (async syntastic replacement)
+Plug 'w0rp/ale'
 
 call plug#end()
+
+set guifont=Monaco:h24
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
@@ -50,6 +70,7 @@ if &term =~ '256color'
 endif
 
 syntax enable
+set background=dark
 colorscheme gruvbox
 
 set number
@@ -64,12 +85,9 @@ set shell=/bin/zsh
 set noswapfile
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
-" rainbow brackets
-let g:rainbow_active = 1
-
 " Ensure ale temp files persist when sleeping
 set dir=~/tmp
-
+set directory=~/.vim/tmp
 set cmdheight=1
 
 " Ggrep pops up quick fix window
@@ -88,13 +106,6 @@ let g:ale_fixers = {
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 
-let g:NERDTreeWinPos = "right"
-let g:NERDTreeShowIgnoredStatus = 1
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let NERDTreeQuitOnOpen = 1
-
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn|)$',
   \ 'file': '\v\.(exe|so|dll)$',
@@ -107,54 +118,7 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 " Change mappings.
 let mapleader = "\<Space>"
 
-noremap <leader>w :NERDTreeToggle<CR>
 noremap <leader>e :BufExplorer<CR>
 noremap <leader>a :copen<CR>
 noremap <leader>o :lopen<CR>
 noremap <leader>d :ALEDetail<CR>
-noremap <leader>j :BookmarkToggle<CR>
-noremap <leader>n :BookmarkAnnotate<CR>
-noremap <leader>l :BookmarkShowAll<CR>
-
-" Lightline
-"
-autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
-
-
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ }
-
-let g:lightline.component_expand = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ }
-
-let g:lightline.component_type = {
-      \     'linter_checking': 'left',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'left',
-      \ }
-
-let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
-
-let g:lightline.separator = {
-  \  'left': ' ❤ ',
-  \  'right': ' ❤ ',
-  \}
-
-let g:lightline.tabline_separator = {
-  \  'left': '',
-  \  'right': '',
-  \}
-
-let g:lightline#ale#indicator_checking = "???"
-let g:lightline#ale#indicator_warnings = "WARN "
-let g:lightline#ale#indicator_errors = "ERR "
-let g:lightline#ale#indicator_ok = "OK"
-
-let g:ale_linters.racket = ['raco']
-let g:vim_parinfer_globs = ['*.rkt', '*.scm', '*.ss']
