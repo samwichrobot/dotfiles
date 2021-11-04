@@ -21,6 +21,7 @@ Plug 'junegunn/fzf.vim'
 " Misc
 Plug 'tpope/vim-sensible'
 Plug 'frazrepo/vim-rainbow'
+Plug 'cweagans/vim-taskpaper'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -43,7 +44,7 @@ if &term =~ '256color'
 endif
 
 syntax enable
-colorscheme dracula
+colorscheme gruvbox
 
 set guifont=Fira\ Code:h22
 
