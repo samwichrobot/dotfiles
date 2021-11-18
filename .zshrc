@@ -1,4 +1,4 @@
-export ZSH="/Users/samanthafarmer/.oh-my-zsh"
+export ZSH="/Users/$(whoami)/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
