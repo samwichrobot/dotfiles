@@ -1,0 +1,9 @@
+#!/bin/sh
+
+alias vim="nvim"
+
+# Link to local alias file
+LOCAL_FILE=~/.alias.local
+if [ -f "$LOCAL_FILE" ]; then
+    source $LOCAL_FILE
+fi
