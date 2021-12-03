@@ -35,7 +35,10 @@ Plug 'tpope/vim-surround'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
+Plug 'bhurlow/vim-parinfer'
 
+Plug 'liuchengxu/eleline.vim'
+Plug 'liuchengxu/vista.vim'
 " Search
 call plug#end()
 
@@ -46,7 +49,7 @@ if &term =~ '256color'
 endif
 
 syntax enable
-colorscheme dracula
+colorscheme gruvbox
 
 set guifont=Fira\ Code:h22
 
@@ -109,8 +112,6 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
-
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)

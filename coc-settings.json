@@ -2,6 +2,23 @@
   "coc.preferences.colorSupport": true,
   "coc.preferences.bracketEnterImprove": true,
   "suggest.noselect": false,
-  "coc.preferences.formatOnSaveFiletypes": ["rust"],
-  "rust-analyzer.checkOnSave.command": "clippy"
+  "coc.preferences.formatOnSaveFiletypes": ["rust", "javascript", "typescript"],
+  "eslint.autoFixOnSave": true,
+  "eslint.format.enable": true,
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "typescript.suggestionActions.enabled": false,
+  "javascript.suggestionActions.enabled": false,
+  "languageserver": {
+    "racket": {
+      "command": "racket",
+      "args": [
+        "--lib",
+        "racket-langserver"
+      ],
+      "filetypes": [
+        "scheme",
+        "racket"
+      ]
+    }
+  }
 }
