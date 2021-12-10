@@ -35,7 +35,6 @@ Plug 'tpope/vim-surround'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
-Plug 'bhurlow/vim-parinfer'
 
 Plug 'liuchengxu/eleline.vim'
 Plug 'liuchengxu/vista.vim'
@@ -168,3 +167,5 @@ endif
 
 " COC-VIM TAB SETTINGS END
 " --------------------------------------------------------
+
+set cursorline
