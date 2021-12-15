@@ -20,5 +20,6 @@
         "racket"
       ]
     }
-  }
+  },
+  "git.addGBlameToVirtualText": true
 }
