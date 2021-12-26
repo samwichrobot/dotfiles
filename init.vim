@@ -38,7 +38,13 @@ Plug 'sheerun/vim-polyglot'
 
 Plug 'liuchengxu/eleline.vim'
 Plug 'liuchengxu/vista.vim'
-" Search
+
+" Racket
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'bhurlow/vim-parinfer'
+Plug 'wlangstroth/vim-racket'
+
 call plug#end()
 
 if &term =~ '256color'
