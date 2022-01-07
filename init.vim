@@ -3,6 +3,11 @@ call plug#begin('~/.vim/plugs')
 " Themes
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim'
+Plug 'thedenisnikulin/vim-cyberpunk'
+Plug 'croaker/mustang-vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'Rigellute/shades-of-purple.vim'
+Plug 'junegunn/seoul256.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -43,7 +48,6 @@ Plug 'liuchengxu/vista.vim'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'bhurlow/vim-parinfer'
-Plug 'wlangstroth/vim-racket'
 
 call plug#end()
 
@@ -54,8 +58,10 @@ if &term =~ '256color'
 endif
 
 syntax enable
-colorscheme gruvbox
+set termguicolors
+colorscheme shades_of_purple
 
+set cursorline
 set guifont=Fira\ Code:h22
 
 set number
