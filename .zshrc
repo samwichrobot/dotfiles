@@ -1,10 +1,4 @@
-export ZSH="/Users/$(whoami)/.oh-my-zsh"
-
-ZSH_THEME="robbyrussell"
-
-plugins=(git rust docker brew)
-
-source $ZSH/oh-my-zsh.sh
+eval "$(starship init zsh)"
 
 # Link to local zshrc file
 LOCAL_ZSHRC_FILE=~/.zshrc.local
@@ -17,3 +11,12 @@ ALIAS_FILE=~/.alias
 if [ -f "$ALIAS_FILE" ]; then
     source $ALIAS_FILE
 fi
+
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit
+    compinit | xargs chmod g-w
+fi
+
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

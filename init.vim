@@ -32,11 +32,12 @@ Plug 'xolox/vim-misc'
 
 " Comments
 Plug 'tpope/vim-commentary'
+Plug 'gyim/vim-boxdraw'
 
 " Formatting
-Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'nestorsalceda/vim-strip-trailing-whitespaces'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
@@ -44,12 +45,24 @@ Plug 'sheerun/vim-polyglot'
 Plug 'liuchengxu/eleline.vim'
 Plug 'liuchengxu/vista.vim'
 
-" Racket
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'bhurlow/vim-parinfer'
-
 call plug#end()
+
+let g:coc_global_extensions = [
+      \ 'coc-tsserver',
+      \ 'coc-sh',
+      \ 'coc-json',
+      \ 'coc-word',
+      \ 'coc-syntax',
+      \ 'coc-html',
+      \ 'coc-eslint',
+      \ 'coc-emoji',
+      \ 'coc-rust-analyzer',
+      \ 'coc-css',
+      \ 'coc-docker',
+      \ 'coc-highlight',
+      \ 'coc-pairs',
+      \ 'coc-yaml',
+      \]
 
 if &term =~ '256color'
   " Disable Background Color Erase (BCE) so that color schemes
