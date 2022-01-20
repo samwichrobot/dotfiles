@@ -1,6 +1,8 @@
 #!/bin/sh
 
 alias vim="nvim"
+alias ls="exa"
+alias cat="bat"
 
 # Link to local alias file
 LOCAL_FILE=~/.alias.local
