@@ -1,5 +1,18 @@
 eval "$(starship init zsh)"
 
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="half-life"
+
+plugins=(git rust tmux node macos docker brew aws )
+
+source $ZSH/oh-my-zsh.sh
+
+export LDFLAGS="-L/usr/local/opt/llvm/lib"
+export CPPFLAGS="-I/usr/local/opt/llvm/include"
+
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+
 # Link to local zshrc file
 LOCAL_ZSHRC_FILE=~/.zshrc.local
 if [ -f "$LOCAL_ZSHRC_FILE" ]; then

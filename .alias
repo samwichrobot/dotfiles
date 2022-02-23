@@ -4,6 +4,12 @@ alias vim="nvim"
 alias ls="exa"
 alias cat="bat"
 
+alias gpr="git pull --rebase"
+alias gapa="git add -p"
+alias gco="git checkout"
+alias gb="git branch"
+alias gl="git log"
+
 # Link to local alias file
 LOCAL_FILE=~/.alias.local
 if [ -f "$LOCAL_FILE" ]; then

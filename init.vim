@@ -45,6 +45,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'liuchengxu/eleline.vim'
 Plug 'liuchengxu/vista.vim'
 
+Plug 'bhurlow/vim-parinfer'
+
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -62,6 +64,7 @@ let g:coc_global_extensions = [
       \ 'coc-highlight',
       \ 'coc-pairs',
       \ 'coc-yaml',
+      \ 'coc-clangd',
       \]
 
 if &term =~ '256color'
@@ -72,7 +75,7 @@ endif
 
 syntax enable
 set termguicolors
-colorscheme shades_of_purple
+colorscheme dracula
 
 set cursorline
 set guifont=Fira\ Code:h22
@@ -194,3 +197,35 @@ endif
 " --------------------------------------------------------
 
 set cursorline
+
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+set statusline+=%{NearestMethodOrFunction()}
+
+" By default vista.vim never run if you don't call it explicitly.
+"
+" If you want to show the nearest function in your statusline automatically,
+" you can add the following line to your vimrc
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+
+" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+let g:vista#renderer#enable_icon = 0
+
+" The default icons can't be suitable for all the filetypes, you can extend it as you wish.
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
+
+let g:vista_executive_for = {
+  \ 'rust': 'coc',
+  \ 'typescript': 'coc',
+  \ 'javascript': 'coc',
+  \ 'c': 'coc'
+  \ }
+
+let g:vista_update_on_text_changed = 1
