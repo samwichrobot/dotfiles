@@ -8,6 +8,7 @@ Plug 'croaker/mustang-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'Rigellute/shades-of-purple.vim'
 Plug 'junegunn/seoul256.vim'
+Plug 'ghifarit53/tokyonight-vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -65,6 +66,7 @@ let g:coc_global_extensions = [
       \ 'coc-pairs',
       \ 'coc-yaml',
       \ 'coc-clangd',
+      \ 'coc-omnisharp',
       \]
 
 if &term =~ '256color'
@@ -75,7 +77,10 @@ endif
 
 syntax enable
 set termguicolors
-colorscheme dracula
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+
+colorscheme tokyonight
 
 set cursorline
 set guifont=Fira\ Code:h22
